@@ -1,0 +1,11 @@
+.header .col-md-5 .card {
+  border: none;
+}
+.header .col-md-5 .card-img-top {
+  max-width: 300px;
+  max-height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}/*# sourceMappingURL=App.css.map */

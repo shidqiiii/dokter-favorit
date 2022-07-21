@@ -1,0 +1,14 @@
+.header {
+  .col-md-5 {
+    .card {
+      border: none;
+    }
+
+    .card-img-top {
+      max-width: 300px;
+      max-height: 300px;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+}
