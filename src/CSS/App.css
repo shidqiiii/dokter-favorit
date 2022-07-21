@@ -1,52 +1,156 @@
-.header .col-md-5 .card {
+.card-title {
+  color: #252b42;
+}
+
+.card-text {
+  color: #737373;
+}
+
+nav.active {
+  background-color: white;
+}
+nav .navbar-brand {
+  color: #252b42;
+}
+nav .navbar-nav {
+  gap: 0.5rem;
+}
+nav .navbar-nav .login {
+  text-align: center;
+  color: white;
+  background-color: #23a6f0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+}
+nav .navbar-nav .login:hover {
+  background-color: white;
+  color: #23a6f0;
+  border: 1px solid #23a6f0;
+}
+
+#header .col-md-6 .card {
   border: none;
 }
-.header .col-md-5 .card-img-top {
-  max-width: 300px;
-  max-height: 300px;
+#header .col-md-6 .card button {
+  text-align: center;
+  color: white;
+  background-color: #23a6f0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+}
+#header .col-md-6 .card button:hover {
+  background-color: white;
+  color: #23a6f0;
+  border: 1px solid #23a6f0;
+}
+#header .col-md-6 .card-img-top {
+  background: linear-gradient(white, #23a6f0);
+  border-radius: 1rem;
+  max-width: 350px;
+  max-height: 350px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
+  margin-top: 1rem;
 }
 
-.feature main .icon-feature {
-  background-color: aqua;
+#feature {
+  background-color: #f6fcff;
+}
+#feature main .icon-feature {
+  background-color: #23a6f0;
   border-radius: 50%;
   padding: 20px;
 }
-
-.feedback .categories-title {
-  border: none !important;
+#feature main .icon-feature .icon {
+  color: white;
 }
-.feedback .feedback-card {
+
+#feedback header {
+  padding: 0 3rem;
+}
+#feedback header .arrow .icon {
+  text-align: center;
+  color: white;
+  background-color: #252b42;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+}
+#feedback header .arrow .icon:hover {
+  background-color: white;
+  color: #252b42;
+  border: 1px solid #252b42;
+}
+#feedback .feedback-card {
   overflow-x: auto;
   scrollbar-width: none;
   scroll-behavior: smooth;
-  gap: 6px;
+  gap: 0.15rem;
 }
-.feedback .feedback-card::-webkit-scrollbar {
+#feedback .feedback-card::-webkit-scrollbar {
   display: none;
 }
-.feedback .feedback-card .card {
+#feedback .feedback-card .card {
   cursor: pointer;
   flex: 0 0 auto;
   width: 300px;
 }
-.feedback .feedback-card .card .card-profile .card-img-top {
+#feedback .feedback-card .card .card-profile .card-img-top {
   width: 70px;
   height: 70px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
-  background-color: aqua;
+  background-color: navy;
   border-radius: 50%;
 }
 
-.newsletter {
-  background-color: navy;
+#newsletter {
+  background-color: #252b42;
 }
-.newsletter form input[type=search] {
-  width: 300px;
+#newsletter .card {
+  background-color: #252b42;
+  border: none;
+}
+#newsletter .card .card-title,
+#newsletter .card .card-text {
+  color: white;
+}
+#newsletter form input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+#newsletter form .form-control {
+  max-width: 250px;
+  border-radius: 0.25rem 0 0 0.25rem;
+  padding: 0.5rem 1rem;
+  border-color: white;
+}
+#newsletter form .form-control:focus {
+  border-color: white;
+  box-shadow: none;
+}
+#newsletter form button {
+  text-align: center;
+  color: white;
+  background-color: #23a6f0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+#newsletter form button:hover {
+  background-color: white;
+  color: #23a6f0;
+  border: 1px solid #23a6f0;
+}
+
+@media screen and (max-width: 992px) {
+  #newsletter {
+    text-align: center;
+  }
 }/*# sourceMappingURL=App.css.map */

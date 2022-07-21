@@ -1,37 +1,106 @@
-.header {
-  .col-md-5 {
+$navy: #252b42;
+$blue: #23a6f0;
+$grey: #737373;
+
+@mixin button($pri, $sec) {
+  text-align: center;
+  color: $pri;
+  background-color: $sec;
+  border: 1px solid $pri;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: $pri;
+    color: $sec;
+    border: 1px solid $sec;
+  }
+}
+
+.card-title {
+  color: $navy;
+}
+
+.card-text {
+  color: $grey;
+}
+
+// Navbar
+nav {
+  &.active {
+    background-color: white;
+  }
+
+  .navbar-brand {
+    color: $navy;
+  }
+
+  .navbar-nav {
+    gap: 0.5rem;
+
+    .login {
+      @include button(white, $blue);
+    }
+  }
+}
+
+// Header
+#header {
+  .col-md-6 {
     .card {
       border: none;
+
+      button {
+        @include button(white, $blue);
+        padding: 0.75rem 1.5rem;
+      }
     }
 
     .card-img-top {
-      max-width: 300px;
-      max-height: 300px;
+      background: linear-gradient(white, $blue);
+      border-radius: 1rem;
+      max-width: 350px;
+      max-height: 350px;
       object-fit: cover;
       object-position: top;
-    }
-  }
-}
-.feature {
-  main {
-    .icon-feature {
-      background-color: aqua;
-      border-radius: 50%;
-      padding: 20px;
+      margin-top: 1rem;
     }
   }
 }
 
-.feedback {
-  .categories-title {
-    border: none !important;
+#feature {
+  background-color: #f6fcff;
+
+  main {
+    .icon-feature {
+      background-color: $blue;
+      border-radius: 50%;
+      padding: 20px;
+
+      .icon {
+        color: white;
+      }
+    }
+  }
+}
+
+#feedback {
+  header {
+    padding: 0 3rem;
+    .arrow {
+      .icon {
+        @include button(white, $navy);
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 50%;
+      }
+    }
   }
 
   .feedback-card {
     overflow-x: auto;
     scrollbar-width: none;
     scroll-behavior: smooth;
-    gap: 6px;
+    gap: 0.15rem;
 
     &::-webkit-scrollbar {
       display: none;
@@ -48,7 +117,7 @@
           height: 70px;
           object-fit: cover;
           object-position: top;
-          background-color: aqua;
+          background-color: navy;
           border-radius: 50%;
         }
       }
@@ -56,12 +125,45 @@
   }
 }
 
-.newsletter {
-  background-color: navy;
+#newsletter {
+  background-color: $navy;
+
+  .card {
+    background-color: $navy;
+    border: none;
+
+    .card-title,
+    .card-text {
+      color: white;
+    }
+  }
 
   form {
-    input[type="search"] {
-      width: 300px;
+    input[type="search"]::-webkit-search-cancel-button {
+      -webkit-appearance: none;
     }
+
+    .form-control {
+      max-width: 250px;
+      border-radius: 0.25rem 0 0 0.25rem;
+      padding: 0.5rem 1rem;
+      border-color: white;
+
+      &:focus {
+        border-color: white;
+        box-shadow: none;
+      }
+    }
+
+    button {
+      @include button(white, $blue);
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #newsletter {
+    text-align: center;
   }
 }
