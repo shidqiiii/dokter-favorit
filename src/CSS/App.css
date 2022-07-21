@@ -14,4 +14,39 @@
   background-color: aqua;
   border-radius: 50%;
   padding: 20px;
+}
+
+.feedback .categories-title {
+  border: none !important;
+}
+.feedback .feedback-card {
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  gap: 6px;
+}
+.feedback .feedback-card::-webkit-scrollbar {
+  display: none;
+}
+.feedback .feedback-card .card {
+  cursor: pointer;
+  flex: 0 0 auto;
+  width: 300px;
+}
+.feedback .feedback-card .card .card-profile .card-img-top {
+  width: 70px;
+  height: 70px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.newsletter {
+  background-color: navy;
+}
+.newsletter form input[type=search] {
+  width: 300px;
 }/*# sourceMappingURL=App.css.map */
