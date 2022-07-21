@@ -1,7 +1,7 @@
 import React from 'react'
 import NavigationBar from '../Components/NavigationBar'
 import { Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap'
-import { AiOutlineCodepen } from "react-icons/ai";
+import { AiOutlineRead } from "react-icons/ai";
 
 export default function LandingPage() {
     return (
@@ -28,6 +28,33 @@ export default function LandingPage() {
                             <Card.Img variant="top" src="./Image/doctor.png" />
                         </Col>
                     </Row>
+                </div>
+
+                {/* Feature */}
+                <div className="feature">
+                    <header className='text-center mb-5'>
+                        <Card.Text className='my-1'>Why you should trust us?</Card.Text>
+                        <Card.Title className='my-2 fw-bold fs-2'>Get to Know About Us</Card.Title>
+                    </header>
+                    <main>
+                        <Row sm={1} md={3} className="gap-4 d-flex justify-content-center align-items-center">
+                            {['24/7 Support', 'Private & Secure', 'Million Customers'].map((item) => (
+                                <Col md={4} lg={3}>
+                                    <Card className='text-center d-flex justify-content-center align-items-center p-3'>
+                                        <div className='icon-feature'>
+                                            <AiOutlineRead size={60} />
+                                        </div>
+                                        <Card.Body>
+                                            <Card.Title className='fw-bold'>{item}</Card.Title>
+                                            <Card.Text>
+                                                Assertively parallel task team driven delverables with resource-leveling services.
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+                        </Row>
+                    </main>
                 </div>
 
             </Container>

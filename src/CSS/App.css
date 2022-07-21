@@ -8,4 +8,10 @@
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
+}
+
+.feature main .icon-feature {
+  background-color: aqua;
+  border-radius: 50%;
+  padding: 20px;
 }/*# sourceMappingURL=App.css.map */
