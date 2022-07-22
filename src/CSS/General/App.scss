@@ -1,0 +1,26 @@
+$navy: #252b42;
+$blue: #23a6f0;
+$lightblue: #f6fcff;
+$grey: #737373;
+
+@mixin button($pri, $sec) {
+  text-align: center;
+  color: $pri;
+  background-color: $sec;
+  border: 1px solid $pri;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: $pri;
+    color: $sec;
+    border: 1px solid $sec;
+  }
+
+  &:active,
+  &:focus {
+    background-color: $pri;
+    border-color: $sec;
+    color: $sec;
+    box-shadow: none;
+  }
+}

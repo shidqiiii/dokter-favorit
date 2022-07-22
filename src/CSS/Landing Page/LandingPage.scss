@@ -1,22 +1,4 @@
-$navy: #252b42;
-$blue: #23a6f0;
-$lightblue: #f6fcff;
-$grey: #737373;
-
-@mixin button($pri, $sec) {
-  text-align: center;
-  color: $pri;
-  background-color: $sec;
-  border: 1px solid $pri;
-  border-radius: 0.5rem;
-
-  &:hover {
-    background-color: $pri;
-    color: $sec;
-    border: 1px solid $sec;
-  }
-}
-
+@import "../General/App.scss";
 .card-title {
   color: $navy;
 }
@@ -108,7 +90,6 @@ nav {
     }
 
     .card {
-      cursor: pointer;
       flex: 0 0 auto;
       width: 300px;
 
@@ -159,24 +140,6 @@ nav {
     button {
       @include button(white, $blue);
       border-radius: 0 0.25rem 0.25rem 0;
-    }
-  }
-}
-
-.entry {
-  .container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    .card {
-      border-radius: 1rem;
-
-      input[type="submit"] {
-        @include button(white, $blue);
-        padding: 0.5rem;
-      }
     }
   }
 }

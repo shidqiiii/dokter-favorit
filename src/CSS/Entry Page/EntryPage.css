@@ -1,0 +1,51 @@
+.entry .container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.entry .container .card {
+  border-radius: 1rem;
+}
+.entry .container .card input[type=submit] {
+  text-align: center;
+  color: white;
+  background-color: #23a6f0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+.entry .container .card input[type=submit]:hover {
+  background-color: white;
+  color: #23a6f0;
+  border: 1px solid #23a6f0;
+}
+.entry .container .card input[type=submit]:active, .entry .container .card input[type=submit]:focus {
+  background-color: white;
+  border-color: #23a6f0;
+  color: #23a6f0;
+  box-shadow: none;
+}
+.entry .container .card form .card-text span {
+  cursor: pointer;
+  color: #23a6f0;
+}
+
+@media screen and (max-width: 992px) {
+  .entry .container .card {
+    padding: 0.25rem !important;
+    margin: auto 1.25rem;
+  }
+  .entry .container .card .col-sm-10 {
+    padding: 0;
+  }
+  .entry .container .card .card-img-top {
+    display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .entry .container {
+    all: unset;
+    margin: 1rem;
+  }
+}/*# sourceMappingURL=EntryPage.css.map */

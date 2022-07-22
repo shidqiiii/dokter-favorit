@@ -27,6 +27,12 @@ nav .navbar-nav .login:hover {
   color: #23a6f0;
   border: 1px solid #23a6f0;
 }
+nav .navbar-nav .login:active, nav .navbar-nav .login:focus {
+  background-color: white;
+  border-color: #23a6f0;
+  color: #23a6f0;
+  box-shadow: none;
+}
 
 #header .col-md-6 .card {
   border: none;
@@ -43,6 +49,12 @@ nav .navbar-nav .login:hover {
   background-color: white;
   color: #23a6f0;
   border: 1px solid #23a6f0;
+}
+#header .col-md-6 .card button:active, #header .col-md-6 .card button:focus {
+  background-color: white;
+  border-color: #23a6f0;
+  color: #23a6f0;
+  box-shadow: none;
 }
 #header .col-md-6 .card-img-top {
   background: linear-gradient(white, #23a6f0);
@@ -86,6 +98,12 @@ nav .navbar-nav .login:hover {
   color: #252b42;
   border: 1px solid #252b42;
 }
+#feedback header .arrow .icon:active, #feedback header .arrow .icon:focus {
+  background-color: white;
+  border-color: #252b42;
+  color: #252b42;
+  box-shadow: none;
+}
 #feedback .feedback-card {
   overflow-x: auto;
   scrollbar-width: none;
@@ -96,7 +114,6 @@ nav .navbar-nav .login:hover {
   display: none;
 }
 #feedback .feedback-card .card {
-  cursor: pointer;
   flex: 0 0 auto;
   width: 300px;
 }
@@ -148,28 +165,11 @@ nav .navbar-nav .login:hover {
   color: #23a6f0;
   border: 1px solid #23a6f0;
 }
-
-.entry .container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.entry .container .card {
-  border-radius: 1rem;
-}
-.entry .container .card input[type=submit] {
-  text-align: center;
-  color: white;
-  background-color: #23a6f0;
-  border: 1px solid white;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-}
-.entry .container .card input[type=submit]:hover {
+#newsletter form button:active, #newsletter form button:focus {
   background-color: white;
+  border-color: #23a6f0;
   color: #23a6f0;
-  border: 1px solid #23a6f0;
+  box-shadow: none;
 }
 
 @media screen and (max-width: 992px) {
@@ -192,4 +192,4 @@ nav .navbar-nav .login:hover {
     all: unset;
     margin: 1rem;
   }
-}/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=LandingPage.css.map */
