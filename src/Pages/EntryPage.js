@@ -1,14 +1,14 @@
 import React from 'react'
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
+import { Card, Col, Container, Form, Row } from 'react-bootstrap'
 
 export default function EntryPage() {
     return (
-        <div className="entry my-5">
-            <Container className='my-5'>
-                <Card className='p-5 shadow-lg'>
+        <div className="entry">
+            <Container>
+                <Card className='mx-5 shadow-lg'>
                     <Row className='d-flex align-items-center justify-content-center py-5'>
                         <Col sm={10} lg={5} className='my-auto px-5'>
-                            {/* <Form>
+                            <Form>
                                 <header className='mb-3 text-center'>
                                     <Card.Title className='fw-bold fs-2 my-0'>Welcome back</Card.Title>
                                     <Card.Text>Welcome back! Please enter your details.</Card.Text>
@@ -25,8 +25,8 @@ export default function EntryPage() {
                                     <Form.Control type="submit" value='Sign in' />
                                 </Form.Group>
                                 <Card.Text className='text-center'>Don't have an account? <span>Sign up</span></Card.Text>
-                            </Form> */}
-                            <Form>
+                            </Form>
+                            {/* <Form>
                                 <header className='mb-3 text-center'>
                                     <Card.Title className='fw-bold fs-2 my-0'>Create an account</Card.Title>
                                     <Card.Text>Let's get started.</Card.Text>
@@ -61,8 +61,8 @@ export default function EntryPage() {
                                 <Form.Group className="mt-4 mb-3">
                                     <Form.Control type="submit" value='Create account' />
                                 </Form.Group>
-                                <Card.Text className='text-center'>Already have an account? <span>Sign in</span></Card.Text>
-                            </Form>
+                                <Card.Text className='text-center'>Already have an account? <a>Sign in</a></Card.Text>
+                            </Form> */}
                         </Col>
                         <Col sm={10} lg={5} className='d-flex align-items-center justify-content-center'>
                             <Card.Img variant="top" src="./Image/login-illustrator.png" />

@@ -107,7 +107,7 @@ nav .navbar-nav .login:hover {
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
-  background-color: navy;
+  background-color: #f6fcff;
   border-radius: 50%;
 }
 
@@ -155,10 +155,10 @@ nav .navbar-nav .login:hover {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.entry .card {
+.entry .container .card {
   border-radius: 1rem;
 }
-.entry .card input[type=submit] {
+.entry .container .card input[type=submit] {
   text-align: center;
   color: white;
   background-color: #23a6f0;
@@ -166,7 +166,7 @@ nav .navbar-nav .login:hover {
   border-radius: 0.5rem;
   padding: 0.5rem;
 }
-.entry .card input[type=submit]:hover {
+.entry .container .card input[type=submit]:hover {
   background-color: white;
   color: #23a6f0;
   border: 1px solid #23a6f0;
@@ -185,5 +185,11 @@ nav .navbar-nav .login:hover {
   }
   .entry .container .card .card-img-top {
     display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .entry .container {
+    all: unset;
+    margin: 1rem;
   }
 }/*# sourceMappingURL=App.css.map */
