@@ -149,8 +149,41 @@ nav .navbar-nav .login:hover {
   border: 1px solid #23a6f0;
 }
 
+.entry .container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.entry .card {
+  border-radius: 1rem;
+}
+.entry .card input[type=submit] {
+  text-align: center;
+  color: white;
+  background-color: #23a6f0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+.entry .card input[type=submit]:hover {
+  background-color: white;
+  color: #23a6f0;
+  border: 1px solid #23a6f0;
+}
+
 @media screen and (max-width: 992px) {
-  #newsletter {
+  #chnewsletter {
     text-align: center;
+  }
+  .entry .container .card {
+    padding: 0.25rem !important;
+    margin: auto 1.25rem;
+  }
+  .entry .container .card .col-sm-10 {
+    padding: 0;
+  }
+  .entry .container .card .card-img-top {
+    display: none;
   }
 }/*# sourceMappingURL=App.css.map */

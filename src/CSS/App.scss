@@ -162,8 +162,43 @@ nav {
   }
 }
 
+.entry {
+  .container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .card {
+    border-radius: 1rem;
+
+    input[type="submit"] {
+      @include button(white, $blue);
+      padding: 0.5rem;
+    }
+  }
+}
+
 @media screen and (max-width: 992px) {
-  #newsletter {
+  #chnewsletter {
     text-align: center;
+  }
+
+  .entry {
+    .container {
+      .card {
+        padding: 0.25rem !important;
+        margin: auto 1.25rem;
+
+        .col-sm-10 {
+          padding: 0;
+        }
+
+        .card-img-top {
+          display: none;
+        }
+      }
+    }
   }
 }
