@@ -32,6 +32,17 @@
   margin: 0.3rem 0;
 }
 
+.doctor-list .card-img {
+  width: 70px;
+  height: 70px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: #f6fcff;
+  border-radius: 50%;
+}
+
 @media screen and (max-width: 992px) {
   .sidebar-component {
     display: none;

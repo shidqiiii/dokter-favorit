@@ -5,7 +5,7 @@ import Template from '../../Components/Dashboard Page/Template'
 export default function DashboardPage() {
     const content = () => {
         return (
-            <Container >
+            <Container fluid>
                 <Card className='text-center'>
                     <Card.Body>
                         <Card.Title>Welcome Back!</Card.Title>

@@ -24,3 +24,12 @@ $grey: #737373;
     box-shadow: none;
   }
 }
+
+@mixin imageRounded($pri) {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  object-position: top;
+  background-color: $pri;
+  border-radius: 50%;
+}

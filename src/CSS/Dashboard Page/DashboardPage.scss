@@ -46,6 +46,12 @@
   }
 }
 
+.doctor-list {
+  .card-img {
+    @include imageRounded($lightblue);
+  }
+}
+
 @media screen and (max-width: 992px) {
   .sidebar-component {
     display: none;
