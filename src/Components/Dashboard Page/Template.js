@@ -1,24 +1,70 @@
-import React from 'react'
-import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { FaBars } from "react-icons/fa";
+import { AiOutlineDashboard, AiOutlineSchedule, AiOutlineUnorderedList, AiOutlineHistory } from "react-icons/ai";
+import { MdPayment } from "react-icons/md";
+import { NavLink } from 'react-router-dom'
 import '../../CSS/Dashboard Page/DashboardPage.css';
-import { AiOutlineMenu, AiOutlineBell } from "react-icons/ai";
-import Sidebar from '../../Components/Dashboard Page/Sidebar';
+import { Card, Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 
 export default function Template(props) {
+    const [isOpen, setIsOpen] = useState(true);
+    const toggle = () => setIsOpen(!isOpen);
+    const menuItem = [
+        {
+            path: "/dashboard",
+            name: "Dashboard",
+            icon: <AiOutlineDashboard />
+        },
+        {
+            path: "/appointment",
+            name: "Appointment",
+            icon: <AiOutlineSchedule />
+        },
+        {
+            path: "/doctor",
+            name: "Doctor List",
+            icon: <AiOutlineUnorderedList />
+        },
+        {
+            path: "/payment",
+            name: "Payment",
+            icon: <MdPayment />
+        },
+        {
+            path: "/history",
+            name: "History",
+            icon: <AiOutlineHistory />
+        },
+    ]
     return (
-        <div className='dashboard'>
-            <Row>
-                <Sidebar />
-                <Col>
-                    <Navbar bg="light" expand="lg" className='px-4 py-3 justify-content-between'>
-                        <Nav.Link><AiOutlineMenu size={20} /></Nav.Link>
-                        <Nav.Link><AiOutlineBell size={20} /></Nav.Link>
-                    </Navbar>
-                    <div className="content pt-3 ps-4">
-                        {props.content}
+        <div className="dashboard d-flex">
+            <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
+                <div className="header text-center py-5" style={{ display: isOpen ? "block" : "none" }}>
+                    <Card.Title className="logo">DoctorFav</Card.Title>
+                </div>
+                {
+                    menuItem.map((item, index) => (
+                        <NavLink to={item.path} key={index} className="link align-items-center my-2 gap-3" activeclassName="active" >
+                            <div className="icon fs-6"> {item.icon}</div>
+                            <Card.Text className='fs-6' style={{ display: isOpen ? "block" : "none" }}>{item.name}</Card.Text>
+                        </NavLink>
+                    ))
+                }
+            </div>
+            <main>
+                <Navbar className='mb-3 px-4 py-3 justify-content-between'>
+                    <div className='icon-nav'>
+                        <FaBars onClick={toggle} size={20} />
                     </div>
-                </Col>
-            </Row>
+                    <DropdownButton id="dropdown-item-button" title="Dropdown button" align="end">
+                        <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
+                        <Dropdown.Item as="button">Action</Dropdown.Item>
+                        <Dropdown.Item as="button">Another action</Dropdown.Item>
+                        <Dropdown.Item as="button">Something else</Dropdown.Item>
+                    </DropdownButton>
+                </Navbar>
+                {props.content}
+            </main>
         </div>
-    )
+    );
 }

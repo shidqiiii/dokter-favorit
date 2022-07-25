@@ -1,5 +1,5 @@
 import React from 'react'
-import FormComp from '../Components/Entry Page/FormComp'
+import FormComponent from '../Components/Entry Page/FormComponent'
 
 const ui = {
     headerTitle: "Welcome back",
@@ -12,7 +12,7 @@ const ui = {
 
 export default function LoginPage() {
     return (
-        <FormComp
+        <FormComponent
             ui={ui} />
     )
 }

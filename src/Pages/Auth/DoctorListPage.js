@@ -30,8 +30,8 @@ export default function DoctorListPage() {
                 <div className="doctor-list">
                     <Row xs={1} md={4} className="g-4">
                         {Array.from({ length: 8 }).map((_, idx) => (
-                            <Col>
-                                <Card className='p-2 mx-2' key={idx}>
+                            <Col key={idx}>
+                                <Card className='p-2 mx-2'>
                                     <Card.Body className='p-0 gap-3 d-flex flex-row align-items-center'>
                                         <Card.Img src="./Image/doctor.png" />
                                         <div>

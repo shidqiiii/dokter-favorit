@@ -1,65 +1,62 @@
 @import "../General/App.scss";
 
 .dashboard {
-  .row {
-    margin: 0 !important;
-    padding: 0 !important;
+  main {
+    width: 100%;
 
-    .col {
-      padding: 0;
-    }
-
-    .sidebar {
-      &.hidden {
-        display: none;
+    nav {
+      .icon-nav {
+        cursor: pointer;
       }
 
-      .sidebar-component {
-        background-color: $navy;
-        min-height: 100vh;
-        padding: 1rem 1rem;
-
-        .card {
-          border: none;
-          background-color: $navy;
-
-          .card-img-top {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-          }
-
-          .card-title,
-          .card-text {
-            color: white;
-          }
-        }
-
-        .nav {
-          .nav-link {
-            color: #fff !important;
-            margin: 0.3rem 0;
-          }
+      .dropdown {
+        .card-img {
+          @include imageRounded($lightblue);
+          width: 30px;
+          height: 30px;
         }
       }
     }
   }
-}
 
-.doctor-list {
-  .card-img {
-    @include imageRounded($lightblue);
-  }
-}
+  .sidebar {
+    background: $navy;
+    color: white;
+    min-height: 100vh;
+    width: 200px;
+    transition: all 0.5s;
 
-@media screen and (max-width: 992px) {
-  .sidebar-component {
-    display: none;
-  }
-}
+    .header {
+      .card-title {
+        color: white;
+      }
+    }
 
-@media screen and (max-width: 1200px) {
-  .sidebar-component {
-    padding: 0 !important;
+    .link {
+      display: flex;
+      color: white;
+      padding: 10px 15px;
+      transition: all 0.5s;
+
+      .card-text {
+        color: white;
+      }
+
+      &:hover {
+        background: $lightblue;
+        transition: all 0.5s;
+        .icon {
+          color: $navy;
+        }
+      }
+    }
+
+    .active {
+      background: $lightblue;
+      .icon,
+      .card-text {
+        color: $navy;
+      }
+    }
   }
 }

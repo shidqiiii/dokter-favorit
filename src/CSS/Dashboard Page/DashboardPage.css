@@ -1,38 +1,10 @@
-.dashboard .row {
-  margin: 0 !important;
-  padding: 0 !important;
+.dashboard main {
+  width: 100%;
 }
-.dashboard .row .col {
-  padding: 0;
+.dashboard main nav .icon-nav {
+  cursor: pointer;
 }
-.dashboard .row .sidebar.hidden {
-  display: none;
-}
-.dashboard .row .sidebar .sidebar-component {
-  background-color: #252b42;
-  min-height: 100vh;
-  padding: 1rem 1rem;
-}
-.dashboard .row .sidebar .sidebar-component .card {
-  border: none;
-  background-color: #252b42;
-}
-.dashboard .row .sidebar .sidebar-component .card .card-img-top {
-  width: 100px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.dashboard .row .sidebar .sidebar-component .card .card-title,
-.dashboard .row .sidebar .sidebar-component .card .card-text {
-  color: white;
-}
-.dashboard .row .sidebar .sidebar-component .nav .nav-link {
-  color: #fff !important;
-  margin: 0.3rem 0;
-}
-
-.doctor-list .card-img {
+.dashboard main nav .dropdown .card-img {
   width: 70px;
   height: 70px;
   -o-object-fit: cover;
@@ -41,15 +13,39 @@
      object-position: top;
   background-color: #f6fcff;
   border-radius: 50%;
+  width: 30px;
+  height: 30px;
 }
-
-@media screen and (max-width: 992px) {
-  .sidebar-component {
-    display: none;
-  }
+.dashboard .sidebar {
+  background: #252b42;
+  color: white;
+  min-height: 100vh;
+  width: 200px;
+  transition: all 0.5s;
 }
-@media screen and (max-width: 1200px) {
-  .sidebar-component {
-    padding: 0 !important;
-  }
+.dashboard .sidebar .header .card-title {
+  color: white;
+}
+.dashboard .sidebar .link {
+  display: flex;
+  color: white;
+  padding: 10px 15px;
+  transition: all 0.5s;
+}
+.dashboard .sidebar .link .card-text {
+  color: white;
+}
+.dashboard .sidebar .link:hover {
+  background: #f6fcff;
+  transition: all 0.5s;
+}
+.dashboard .sidebar .link:hover .icon {
+  color: #252b42;
+}
+.dashboard .sidebar .active {
+  background: #f6fcff;
+}
+.dashboard .sidebar .active .icon,
+.dashboard .sidebar .active .card-text {
+  color: #252b42;
 }/*# sourceMappingURL=DashboardPage.css.map */

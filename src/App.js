@@ -15,9 +15,12 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Register" element={<RegisterPage />} />
+
+        {/* Middleware */}
         <Route path="/Dashboard" element={<DashboardPage />} />
         <Route path="/Appointment" element={<AppointmentPage />} />
         <Route path="/doctor" element={<DoctorListPage />} />
+
         <Route path="*" element={<NotFoundPage replace to="/404" />} />
       </Routes>
     </Router>

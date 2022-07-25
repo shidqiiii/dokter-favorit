@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
-import FormComp from '../Components/Entry Page/FormComp'
+import FormComponent from '../Components/Entry Page/FormComponent'
 
 export default function RegisterPage() {
     const [user, setUser] = useState('pasien')
@@ -57,7 +57,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <FormComp
+        <FormComponent
             ui={ui} />
     )
 }
