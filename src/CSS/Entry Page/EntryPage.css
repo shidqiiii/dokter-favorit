@@ -3,6 +3,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 100%;
 }
 .entry .container .card {
   border-radius: 1rem;
@@ -34,18 +35,12 @@
 @media screen and (max-width: 992px) {
   .entry .container .card {
     padding: 0.25rem !important;
-    margin: auto 1.25rem;
+    margin: 0 1rem !important;
   }
   .entry .container .card .col-sm-10 {
     padding: 0;
   }
   .entry .container .card .card-img-top {
     display: none;
-  }
-}
-@media screen and (max-width: 1200px) {
-  .entry .container {
-    all: unset;
-    margin: 1rem;
   }
 }/*# sourceMappingURL=EntryPage.css.map */

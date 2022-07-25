@@ -176,20 +176,4 @@ nav .navbar-nav .login:active, nav .navbar-nav .login:focus {
   #chnewsletter {
     text-align: center;
   }
-  .entry .container .card {
-    padding: 0.25rem !important;
-    margin: auto 1.25rem;
-  }
-  .entry .container .card .col-sm-10 {
-    padding: 0;
-  }
-  .entry .container .card .card-img-top {
-    display: none;
-  }
-}
-@media screen and (max-width: 1200px) {
-  .entry .container {
-    all: unset;
-    margin: 1rem;
-  }
 }/*# sourceMappingURL=LandingPage.css.map */

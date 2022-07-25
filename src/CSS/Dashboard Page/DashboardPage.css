@@ -1,0 +1,44 @@
+.dashboard .row {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.dashboard .row .col {
+  padding: 0;
+}
+.dashboard .row .sidebar.hidden {
+  display: none;
+}
+.dashboard .row .sidebar .sidebar-component {
+  background-color: #252b42;
+  min-height: 100vh;
+  padding: 1rem 1rem;
+}
+.dashboard .row .sidebar .sidebar-component .card {
+  border: none;
+  background-color: #252b42;
+}
+.dashboard .row .sidebar .sidebar-component .card .card-img-top {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.dashboard .row .sidebar .sidebar-component .card .card-title,
+.dashboard .row .sidebar .sidebar-component .card .card-text {
+  color: white;
+}
+.dashboard .row .sidebar .sidebar-component .nav .nav-link {
+  color: #fff !important;
+  margin: 0.3rem 0;
+}
+
+@media screen and (max-width: 992px) {
+  .sidebar-component {
+    display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .sidebar-component {
+    padding: 0 !important;
+  }
+}/*# sourceMappingURL=DashboardPage.css.map */

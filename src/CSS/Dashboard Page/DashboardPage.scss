@@ -1,0 +1,59 @@
+@import "../General/App.scss";
+
+.dashboard {
+  .row {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    .col {
+      padding: 0;
+    }
+
+    .sidebar {
+      &.hidden {
+        display: none;
+      }
+
+      .sidebar-component {
+        background-color: $navy;
+        min-height: 100vh;
+        padding: 1rem 1rem;
+
+        .card {
+          border: none;
+          background-color: $navy;
+
+          .card-img-top {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+          }
+
+          .card-title,
+          .card-text {
+            color: white;
+          }
+        }
+
+        .nav {
+          .nav-link {
+            color: #fff !important;
+            margin: 0.3rem 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .sidebar-component {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar-component {
+    padding: 0 !important;
+  }
+}
