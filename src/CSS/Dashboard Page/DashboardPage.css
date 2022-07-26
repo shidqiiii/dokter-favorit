@@ -1,10 +1,101 @@
+.dashboard button {
+  text-align: center;
+  color: white;
+  background-color: #252b42;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+}
+.dashboard button:hover {
+  background-color: white;
+  color: #252b42;
+  border: 1px solid #252b42;
+}
+.dashboard button:active, .dashboard button:focus {
+  background-color: white;
+  border-color: #252b42;
+  color: #252b42;
+  box-shadow: none;
+}
 .dashboard main {
   width: 100%;
 }
 .dashboard main nav .icon-nav {
   cursor: pointer;
 }
-.dashboard main nav .dropdown .card-img {
+.dashboard main nav .dropdown .dropdown-toggle {
+  text-align: center;
+  color: white;
+  background-color: #252b42;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+}
+.dashboard main nav .dropdown .dropdown-toggle:hover {
+  background-color: white;
+  color: #252b42;
+  border: 1px solid #252b42;
+}
+.dashboard main nav .dropdown .dropdown-toggle:active, .dashboard main nav .dropdown .dropdown-toggle:focus {
+  background-color: white;
+  border-color: #252b42;
+  color: #252b42;
+  box-shadow: none;
+}
+.dashboard main nav .dropdown-menu .dropdown-item {
+  text-align: center;
+  color: #252b42;
+  background-color: white;
+  border: 1px solid #252b42;
+  border-radius: 0.5rem;
+  border: 1px solid white;
+  border-radius: 0;
+}
+.dashboard main nav .dropdown-menu .dropdown-item:hover {
+  background-color: #252b42;
+  color: white;
+  border: 1px solid white;
+}
+.dashboard main nav .dropdown-menu .dropdown-item:active, .dashboard main nav .dropdown-menu .dropdown-item:focus {
+  background-color: #252b42;
+  border-color: white;
+  color: white;
+  box-shadow: none;
+}
+
+.sidebar {
+  background: #252b42;
+  color: white;
+  min-height: 100vh;
+  width: 200px;
+  transition: all 0.5s;
+}
+.sidebar .header .card-title {
+  color: white;
+}
+.sidebar .link {
+  color: white;
+  padding: 10px 15px;
+  transition: all 0.5s;
+}
+.sidebar .link .card-text {
+  color: white;
+}
+.sidebar .link:hover {
+  background: #f6fcff;
+  transition: all 0.5s;
+}
+.sidebar .link:hover .card-text,
+.sidebar .link:hover .icon {
+  color: #252b42;
+}
+.sidebar .active {
+  background: #f6fcff;
+}
+.sidebar .active .icon,
+.sidebar .active .card-text {
+  color: #252b42;
+}
+
+.doctor-list .doctor-card-list .card-img {
   width: 70px;
   height: 70px;
   -o-object-fit: cover;
@@ -13,39 +104,4 @@
      object-position: top;
   background-color: #f6fcff;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-}
-.dashboard .sidebar {
-  background: #252b42;
-  color: white;
-  min-height: 100vh;
-  width: 200px;
-  transition: all 0.5s;
-}
-.dashboard .sidebar .header .card-title {
-  color: white;
-}
-.dashboard .sidebar .link {
-  display: flex;
-  color: white;
-  padding: 10px 15px;
-  transition: all 0.5s;
-}
-.dashboard .sidebar .link .card-text {
-  color: white;
-}
-.dashboard .sidebar .link:hover {
-  background: #f6fcff;
-  transition: all 0.5s;
-}
-.dashboard .sidebar .link:hover .icon {
-  color: #252b42;
-}
-.dashboard .sidebar .active {
-  background: #f6fcff;
-}
-.dashboard .sidebar .active .icon,
-.dashboard .sidebar .active .card-text {
-  color: #252b42;
 }/*# sourceMappingURL=DashboardPage.css.map */

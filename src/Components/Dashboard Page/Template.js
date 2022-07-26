@@ -44,7 +44,7 @@ export default function Template(props) {
                 </div>
                 {
                     menuItem.map((item, index) => (
-                        <NavLink to={item.path} key={index} className="link align-items-center my-2 gap-3" activeclassName="active" >
+                        <NavLink to={item.path} key={index} className="d-flex link align-items-center my-2 gap-3" activeclassName="active" >
                             <div className="icon fs-6"> {item.icon}</div>
                             <Card.Text className='fs-6' style={{ display: isOpen ? "block" : "none" }}>{item.name}</Card.Text>
                         </NavLink>
@@ -56,11 +56,9 @@ export default function Template(props) {
                     <div className='icon-nav'>
                         <FaBars onClick={toggle} size={20} />
                     </div>
-                    <DropdownButton id="dropdown-item-button" title="Dropdown button" align="end">
-                        <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
-                        <Dropdown.Item as="button">Action</Dropdown.Item>
-                        <Dropdown.Item as="button">Another action</Dropdown.Item>
-                        <Dropdown.Item as="button">Something else</Dropdown.Item>
+                    <DropdownButton title="Robert Richalisson" align="end">
+                        <Dropdown.Item as="button">Profile</Dropdown.Item>
+                        <Dropdown.Item as="button">Sign out</Dropdown.Item>
                     </DropdownButton>
                 </Navbar>
                 {props.content}

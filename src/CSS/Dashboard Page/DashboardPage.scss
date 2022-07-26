@@ -1,6 +1,10 @@
 @import "../General/App.scss";
 
 .dashboard {
+  button {
+    @include button(white, $navy);
+  }
+
   main {
     width: 100%;
 
@@ -10,53 +14,67 @@
       }
 
       .dropdown {
-        .card-img {
-          @include imageRounded($lightblue);
-          width: 30px;
-          height: 30px;
+        .dropdown-toggle {
+          @include button(white, $navy);
+        }
+      }
+
+      .dropdown-menu {
+        .dropdown-item {
+          @include button($navy, white);
+          border: 1px solid white;
+          border-radius: 0;
         }
       }
     }
   }
+}
 
-  .sidebar {
-    background: $navy;
+.sidebar {
+  background: $navy;
+  color: white;
+  min-height: 100vh;
+  width: 200px;
+  transition: all 0.5s;
+
+  .header {
+    .card-title {
+      color: white;
+    }
+  }
+
+  .link {
     color: white;
-    min-height: 100vh;
-    width: 200px;
+    padding: 10px 15px;
     transition: all 0.5s;
 
-    .header {
-      .card-title {
-        color: white;
-      }
-    }
-
-    .link {
-      display: flex;
+    .card-text {
       color: white;
-      padding: 10px 15px;
-      transition: all 0.5s;
-
-      .card-text {
-        color: white;
-      }
-
-      &:hover {
-        background: $lightblue;
-        transition: all 0.5s;
-        .icon {
-          color: $navy;
-        }
-      }
     }
 
-    .active {
+    &:hover {
       background: $lightblue;
-      .icon,
-      .card-text {
+      transition: all 0.5s;
+      .card-text,
+      .icon {
         color: $navy;
       }
+    }
+  }
+
+  .active {
+    background: $lightblue;
+    .icon,
+    .card-text {
+      color: $navy;
+    }
+  }
+}
+
+.doctor-list {
+  .doctor-card-list {
+    .card-img {
+      @include imageRounded($lightblue);
     }
   }
 }

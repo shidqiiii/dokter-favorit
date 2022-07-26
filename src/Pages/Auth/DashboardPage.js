@@ -5,8 +5,8 @@ import Template from '../../Components/Dashboard Page/Template'
 export default function DashboardPage() {
     const content = () => {
         return (
-            <Container fluid>
-                <Card className='text-center'>
+            <Container>
+                <Card className='text-center mb-4'>
                     <Card.Body>
                         <Card.Title>Welcome Back!</Card.Title>
                         <Card.Text>
@@ -16,7 +16,7 @@ export default function DashboardPage() {
                         <Button variant="primary">Make an Appointment</Button>
                     </Card.Body>
                 </Card>
-                <Row className='gap-3 g-3'>
+                <Row className='g-3'>
                     <Col>
                         <Card className='text-center'>
                             <Card.Body>
