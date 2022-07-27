@@ -1,7 +1,7 @@
 @import "../General/App.scss";
 
 .dashboard {
-  button {
+  .btn-primary {
     @include button(white, $navy);
   }
 
@@ -95,5 +95,22 @@
     .card-text {
       margin-bottom: 0.5rem;
     }
+  }
+}
+
+.history {
+  .card-img {
+    @include imageRounded($lightblue);
+    width: 75px;
+    height: 75px;
+  }
+
+  .card-text {
+    color: $navy;
+  }
+
+  td {
+    vertical-align: middle;
+    width: 22%;
   }
 }
