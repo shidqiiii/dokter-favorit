@@ -25,11 +25,11 @@ export default function Template(props) {
             name: "Doctor List",
             icon: <AiOutlineUnorderedList />
         },
-        {
-            path: "/payment",
-            name: "Payment",
-            icon: <MdPayment />
-        },
+        // {
+        //     path: "/payment",
+        //     name: "Payment",
+        //     icon: <MdPayment />
+        // },
         {
             path: "/history",
             name: "History",

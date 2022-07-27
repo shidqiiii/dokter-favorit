@@ -1,8 +1,15 @@
 import React from 'react'
 import { Card, Col, Container, Form, Row } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 import Template from '../../Components/Dashboard Page/Template'
 
 export default function DoctorListPage() {
+    const navigate = useNavigate();
+    const navigateToDoctorDetail = (key) => {
+        navigate(`/doctor/${key}`);
+        // window.location.reload();
+    };
+
     const content = () => {
         return (
             <div className="doctor-list">
@@ -32,7 +39,8 @@ export default function DoctorListPage() {
                         <Row xs={1} md={2} lg={4} className="g-3">
                             {Array.from({ length: 8 }).map((_, idx) => (
                                 <Col key={idx}>
-                                    <Card className='p-3'>
+                                    <Card className='p-3'
+                                        onClick={() => navigateToDoctorDetail(idx)}>
                                         <Card.Body className='p-0 gap-3 d-flex flex-row align-items-center'>
                                             <Card.Img src="./Image/doctor.png" />
                                             <div>

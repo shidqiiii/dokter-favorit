@@ -95,7 +95,10 @@
   color: #252b42;
 }
 
-.doctor-list .doctor-card-list .card-img {
+.doctor-list .doctor-card-list .card {
+  cursor: pointer;
+}
+.doctor-list .doctor-card-list .card .card-img {
   width: 70px;
   height: 70px;
   -o-object-fit: cover;
@@ -104,4 +107,21 @@
      object-position: top;
   background-color: #f6fcff;
   border-radius: 50%;
+}
+
+.doctor-detail .doctor-content .card-img {
+  width: 70px;
+  height: 70px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: #f6fcff;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+.doctor-detail .doctor-content .card-title,
+.doctor-detail .doctor-content .card-text {
+  margin-bottom: 0.5rem;
 }/*# sourceMappingURL=DashboardPage.css.map */

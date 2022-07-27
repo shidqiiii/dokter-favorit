@@ -73,8 +73,27 @@
 
 .doctor-list {
   .doctor-card-list {
+    .card {
+      cursor: pointer;
+
+      .card-img {
+        @include imageRounded($lightblue);
+      }
+    }
+  }
+}
+
+.doctor-detail {
+  .doctor-content {
     .card-img {
       @include imageRounded($lightblue);
+      width: 150px;
+      height: 150px;
+    }
+
+    .card-title,
+    .card-text {
+      margin-bottom: 0.5rem;
     }
   }
 }
