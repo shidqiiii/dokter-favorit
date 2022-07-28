@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import DashboardPage from '../Pages/Auth/DashboardPage';
 import LandingPage from '../Pages/LandingPage';
@@ -14,22 +14,20 @@ import Cookies from 'js-cookie';
 export default function Routing() {
     return (
         <Router>
-            <Fragment>
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/Login" element={<LoginPage />} />
-                    <Route path="/Register" element={<RegisterPage />} />
+            <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/Login" element={<LoginPage />} />
+                <Route path="/Register" element={<RegisterPage />} />
 
-                    {/* Middleware */}
-                    <Route path="/Dashboard" element={<ProtectedRoute Component={DashboardPage} />} />
-                    <Route path="/Appointment" element={<ProtectedRoute Component={AppointmentPage} />} />
-                    <Route path="/doctor" element={<ProtectedRoute Component={DoctorListPage} />} />
-                    <Route path="/doctor/:key" element={<ProtectedRoute Component={DoctorDetailPage} />} />
-                    <Route path="/history" element={<ProtectedRoute Component={HistoryPage} />} />
+                {/* Middleware */}
+                <Route path="/Dashboard" element={<ProtectedRoute Component={DashboardPage} />} />
+                <Route path="/Appointment" element={<ProtectedRoute Component={AppointmentPage} />} />
+                <Route path="/doctor" element={<ProtectedRoute Component={DoctorListPage} />} />
+                <Route path="/doctor/:key" element={<ProtectedRoute Component={DoctorDetailPage} />} />
+                <Route path="/history" element={<ProtectedRoute Component={HistoryPage} />} />
 
-                    <Route path="*" element={<NotFoundPage replace to="/404" />} />
-                </Routes>
-            </Fragment>
+                <Route path="*" element={<NotFoundPage replace to="/404" />} />
+            </Routes>
         </Router>
     )
 }
