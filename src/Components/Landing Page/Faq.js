@@ -11,7 +11,7 @@ export default function Faq() {
                 </header>
                 <Row xs={1} md={2} className="g-4">
                     {Array.from({ length: 8 }).map((_, idx) => (
-                        <Col>
+                        <Col key={idx}>
                             <Accordion>
                                 <Accordion.Item eventKey="0">
                                     <Accordion.Header>

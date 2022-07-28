@@ -8,6 +8,7 @@ import Features from '../Components/Landing Page/Features';
 import Faq from '../Components/Landing Page/Faq';
 import Feedback from '../Components/Landing Page/Feedback';
 
+
 export default function LandingPage() {
     return (
         <>

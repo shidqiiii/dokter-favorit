@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Link } from 'react-router-dom'
 
 
 export default function NavigationBar() {
@@ -27,7 +28,7 @@ export default function NavigationBar() {
                         <Nav.Link href="#feature">Features</Nav.Link>
                         <Nav.Link href="#faq">FAQs</Nav.Link>
                         <Nav.Link href="#newsletter">Contact</Nav.Link>
-                        <Nav.Link href="/login" className='login px-3'>Login <AiOutlineArrowRight /></Nav.Link>
+                        <Nav.Link as={Link} to="/login" className='login px-3'>Login <AiOutlineArrowRight /></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

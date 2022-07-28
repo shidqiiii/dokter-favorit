@@ -3,7 +3,13 @@ import { Alert, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { useNavigate } from 'react-router-dom';
+import { connect } from "react-redux";
+import { updateUser } from '../Redux/Action/User_action';
+import Cookies from 'js-cookie'
+
+
 // import FormComponent from '../Components/Entry Page/FormComponent'
+
 
 const ui = {
     headerTitle: "Welcome back",
@@ -14,13 +20,15 @@ const ui = {
     href: "register",
 }
 
-export default function LoginPage() {
+function LoginPage(props) {
     const [inputData, setInputData] = useState({
         email: "",
         password: "",
     });
 
     const [inputError, setinputError] = useState("")
+
+    const navigate = useNavigate();
 
     // HandleChange
     const handleChange = (target, value) => {
@@ -33,9 +41,12 @@ export default function LoginPage() {
 
     const handleLoginApi = async () => {
         const data = await BaseApi.Login(inputData.email, inputData.password);
-        console.log(data);
         if (data.status === "SUCCESS") {
-            console.log(data);
+            // props.dispatch(updateUser({
+            //     token: data.token
+            // }));
+            const expired = new Date(new Date().getTime() + 30 * 1000);
+            Cookies.set('token', data.token, { expires: expired });
             navigate('/dashboard');
         } else if (data.error === "ERROR") {
             setinputError(data.message);
@@ -46,8 +57,6 @@ export default function LoginPage() {
         e.preventDefault();
         handleLoginApi()
     }
-
-    const navigate = useNavigate();
 
     const handleError = () => {
         if (inputError !== "") {
@@ -62,6 +71,7 @@ export default function LoginPage() {
         // <FormComponent
         //     ui={ui} />
         <div className="entry">
+            {console.log(props.userReducer)}
             <Container>
                 <Card className='mx-5 shadow-lg'>
                     <Row className='d-flex align-items-center justify-content-center py-5'>
@@ -115,3 +125,9 @@ export default function LoginPage() {
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    userReducer: state.userReducer
+});
+
+export default connect(mapStateToProps)(LoginPage);

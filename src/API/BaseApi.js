@@ -17,7 +17,7 @@ class BaseApi {
             .catch((error) => {
                 result = error.response.data;
             })
-        console.log("result: ", result);
+        // console.log("result: ", result);
         return result
     }
 

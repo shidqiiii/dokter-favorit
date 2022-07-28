@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { FaBars } from "react-icons/fa";
 import { AiOutlineDashboard, AiOutlineSchedule, AiOutlineUnorderedList, AiOutlineHistory } from "react-icons/ai";
 import { MdPayment } from "react-icons/md";
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import '../../CSS/Dashboard Page/DashboardPage.css';
 import { Card, Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 
 export default function Template(props) {
     const [isOpen, setIsOpen] = useState(true);
@@ -36,6 +37,13 @@ export default function Template(props) {
             icon: <AiOutlineHistory />
         },
     ]
+
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        Cookies.remove('token');
+        navigate('/login');
+    }
     return (
         <div className="dashboard d-flex">
             <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
@@ -58,7 +66,7 @@ export default function Template(props) {
                     </div>
                     <DropdownButton title="Robert Richalisson" align="end">
                         <Dropdown.Item as="button">Profile</Dropdown.Item>
-                        <Dropdown.Item as="button">Sign out</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={handleSignOut}>Sign out</Dropdown.Item>
                     </DropdownButton>
                 </Navbar>
                 {props.content}
