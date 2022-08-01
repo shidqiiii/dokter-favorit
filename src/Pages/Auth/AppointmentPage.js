@@ -39,6 +39,11 @@ export default function AppointmentPage() {
                                     <Form.Control type="time" />
                                 </Form.Group>
 
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Durasi</Form.Label>
+                                    <Form.Control type="time" />
+                                </Form.Group>
+
                                 <Button variant="primary" type="submit">Next Step</Button>
                             </Form>
                         </Card.Body>

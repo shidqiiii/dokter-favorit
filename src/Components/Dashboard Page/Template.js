@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaBars } from "react-icons/fa";
 import { AiOutlineDashboard, AiOutlineSchedule, AiOutlineUnorderedList, AiOutlineHistory } from "react-icons/ai";
 import { RiHospitalLine } from "react-icons/ri";
@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import '../../CSS/Dashboard Page/DashboardPage.css';
 import { Card, Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 import Cookies from 'js-cookie';
+import { BaseApi } from '../../API/BaseApi';
 
 export default function Template(props) {
     const [isOpen, setIsOpen] = useState(true);
@@ -39,6 +40,7 @@ export default function Template(props) {
         Cookies.remove('token');
         navigate('/login');
     }
+
     return (
         <div className="dashboard d-flex">
             <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">

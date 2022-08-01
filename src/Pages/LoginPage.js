@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Alert, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { connect } from "react-redux";
-import { updateUser } from '../Redux/Action/User_action';
 import Cookies from 'js-cookie'
 
 
@@ -13,19 +12,20 @@ import Cookies from 'js-cookie'
 
 const ui = {
     headerTitle: "Welcome back",
-    headerCaption: "lcome back! Please enter your details.",
+    headerCaption: "Welcome back! Please enter your details.",
     buttonText: "Sign in",
     text: "Don't",
     hrefText: "Sign up",
     href: "register",
 }
 
-function LoginPage(props) {
+export default function LoginPage() {
     const [inputData, setInputData] = useState({
         email: "",
         password: "",
     });
 
+    const [isLoading, setIsLoading] = useState(false)
     const [inputError, setinputError] = useState("")
 
     const navigate = useNavigate();
@@ -39,23 +39,27 @@ function LoginPage(props) {
         setinputError("")
     }
 
-    const handleLoginApi = async () => {
-        const data = await BaseApi.Login(inputData.email, inputData.password);
+    const handleLoginUser = async () => {
+        const data = await BaseApi.UserLogin(inputData.email, inputData.password);
         if (data.status === "SUCCESS") {
-            // props.dispatch(updateUser({
-            //     token: data.token
-            // }));
             const expired = new Date(new Date().getTime() + 60 * 60 * 1000);
             Cookies.set('token', data.token, { expires: expired });
             navigate('/dashboard');
         } else if (data.error === "ERROR") {
             setinputError(data.message);
         }
+
+        setIsLoading(false);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleLoginApi()
+        setIsLoading(true);
+        setTimeout(() => {
+            handleLoginUser();
+        }, 1000);
+
+
     }
 
     const handleError = () => {
@@ -71,7 +75,6 @@ function LoginPage(props) {
         // <FormComponent
         //     ui={ui} />
         <div className="entry">
-            {console.log(props.userReducer)}
             <Container>
                 <Card className='mx-5 shadow-lg'>
                     <Row className='d-flex align-items-center justify-content-center py-5'>
@@ -86,34 +89,47 @@ function LoginPage(props) {
                                     </Card.Text>
                                 </header>
 
-                                <Form.Group className="mb-3">
-                                    <Form.Label className='fw-bold'>Email Address</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={inputData.firstName}
-                                        onChange={(event) => { handleChange("email", event.target.value) }} />
-                                </Form.Group>
+                                {isLoading ?
+                                    (
+                                        <div className='text-center'>
+                                            <Spinner animation="border" role="status">
+                                                <span className="visually-hidden">Loading...</span>
+                                            </Spinner>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        <>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label className='fw-bold'>Email Address</Form.Label>
+                                                <Form.Control
+                                                    type="email"
+                                                    placeholder="Enter your email"
+                                                    value={inputData.firstName}
+                                                    onChange={(event) => { handleChange("email", event.target.value) }} />
+                                            </Form.Group>
 
-                                <Form.Group className="mb-3">
-                                    <Form.Label className='fw-bold'>Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="*******"
-                                        value={inputData.password}
-                                        onChange={(event) => { handleChange("password", event.target.value) }} />
-                                </Form.Group>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label className='fw-bold'>Password</Form.Label>
+                                                <Form.Control
+                                                    type="password"
+                                                    placeholder="*******"
+                                                    value={inputData.password}
+                                                    onChange={(event) => { handleChange("password", event.target.value) }} />
+                                            </Form.Group>
 
-                                {handleError()}
+                                            {handleError()}
 
-                                <Form.Group className="mt-4 mb-3">
-                                    <Form.Control type="submit" value={ui.buttonText} />
-                                </Form.Group>
+                                            <Form.Group className="mt-4 mb-3">
+                                                <Form.Control type="submit" value={ui.buttonText} />
+                                            </Form.Group>
 
-                                <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
-                                    {ui.hrefText}
-                                </NavLink>
-                                </Card.Text>
+                                            <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
+                                                {ui.hrefText}
+                                            </NavLink>
+                                            </Card.Text>
+                                        </>
+                                    )}
                             </Form >
                         </Col>
                         <Col sm={10} lg={5} className='d-flex align-items-center justify-content-center'>
@@ -125,9 +141,3 @@ function LoginPage(props) {
         </div>
     )
 }
-
-const mapStateToProps = state => ({
-    userReducer: state.userReducer
-});
-
-export default connect(mapStateToProps)(LoginPage);

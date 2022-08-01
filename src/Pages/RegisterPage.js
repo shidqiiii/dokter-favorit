@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Card, Col, Container, Form, Row, Alert } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
 import axios from "axios";
 import { BaseApi } from '../API/BaseApi';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 // import FormComponent from '../Components/Entry Page/FormComponent'
 
 const ui =
@@ -17,88 +18,68 @@ const ui =
 }
 
 export default function RegisterPage() {
-    const [data, setData] = useState({
+    const [inputData, setInputData] = useState({
+        name: "",
         email: "",
         password: "",
-        fullName: "",
-        role: "",
-        departement: ""
+        role: ""
     });
 
-    const [departementList, setDepartementList] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
+    const [inputError, setinputError] = useState("")
+
+    const navigate = useNavigate();
 
     // HandleChange
     const handleChange = (target, value) => {
-        setData({
-            ...data,
+        setInputData({
+            ...inputData,
             [target]: value
-        })
+        });
+        setinputError("")
     }
 
-    const handleAllDepartement = async () => {
-        const data = await BaseApi.allDepartement();
+    const handleLoginUser = async () => {
+        const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role);
         if (data.status === "SUCCESS") {
-            setDepartementList(data.data)
+            console.log("sucess");
+            navigate('/login');
+        } else {
+            setinputError(data.message);
         }
-    }
 
-    useEffect(() => {
-        handleAllDepartement();
-    }, [])
-
-
-    const handleRegister = async () => {
-        let result = null;
-
-        await axios.post("https://3853-114-5-147-212.ap.ngrok.io/auth/Register", {
-            email: data.email,
-            role: data.role,
-            name: data.fullName,
-            password: data.password,
-            id_department: data.departement,
-        }).then((response) => {
-            console.log(response);
-            result = response
-        })
-            .catch((error) => {
-                console.log(error);
-            })
-        return result
+        setIsLoading(false);
     };
-
-    // const handleRegisterPasien = async () => {
-    //     let result = null;
-
-    //     await axios.post("https://3853-114-5-147-212.ap.ngrok.io/auth/Register", {
-    //         email: data.email,
-    //         role: data.role,
-    //         name: data.fullName,
-    //         password: data.password,
-    //     }).then((response) => {
-    //         console.log(response);
-    //         result = response
-    //     })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    //     return result
-    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleRegister();
+        setIsLoading(true);
+        setTimeout(() => {
+            handleLoginUser();
+        }, 1000);
+
+
+    }
+
+    const handleError = () => {
+        if (inputError !== "") {
+            return (
+                <Alert variant="danger">
+                    {inputError}
+                </Alert>)
+        }
     }
 
     const selectDepartemen = () => {
-        if (data.role === 'doctor') {
+        if (inputData.role === 'doctor') {
             return (
                 <Form.Group className="mb-3">
                     <Form.Label className='fw-bold'>Departement</Form.Label>
                     <Form.Select
                         onChange={(event) => { handleChange("departement", event.target.value) }}
-                        value={data.departement}>
+                        value={inputData.departement}>
                         <option value="" defaultValue disabled hidden>Select here</option>
-                        {departementList.map(item => (
+                        {inputData.map(item => (
                             <option value={item.id} key={item.id}>{item.name}</option>
                         ))}
                     </Form.Select>
@@ -108,8 +89,6 @@ export default function RegisterPage() {
     }
 
     return (
-        // <FormComponent
-        //     ui={ui} />
         <div className="entry">
             <Container>
                 <Card className='mx-5 shadow-lg'>
@@ -125,55 +104,70 @@ export default function RegisterPage() {
                                     </Card.Text>
                                 </header>
 
-                                <Form.Group className="mb-3">
-                                    <Form.Label className='fw-bold'>Email Address</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={data.firstName}
-                                        onChange={(event) => { handleChange("email", event.target.value) }} />
-                                </Form.Group>
+                                {isLoading ?
+                                    (
+                                        <div className='text-center'>
+                                            <Spinner animation="border" role="status">
+                                                <span className="visually-hidden">Loading...</span>
+                                            </Spinner>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        <>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label className='fw-bold'>Email Address</Form.Label>
+                                                <Form.Control
+                                                    type="email"
+                                                    placeholder="Enter your email"
+                                                    value={inputData.firstName}
+                                                    onChange={(event) => { handleChange("email", event.target.value) }} />
+                                            </Form.Group>
 
-                                <Form.Group className="mb-3">
-                                    <Form.Label className='fw-bold'>Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="*******"
-                                        value={data.password}
-                                        onChange={(event) => { handleChange("password", event.target.value) }} />
-                                </Form.Group>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label className='fw-bold'>Password</Form.Label>
+                                                <Form.Control
+                                                    type="password"
+                                                    placeholder="*******"
+                                                    value={inputData.password}
+                                                    onChange={(event) => { handleChange("password", event.target.value) }} />
+                                            </Form.Group>
 
-                                <Form.Group className="mb-3">
-                                    <Form.Label className='fw-bold'>Full Name</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter your full name"
-                                        value={data.fullName}
-                                        onChange={(event) => { handleChange("fullName", event.target.value) }} />
-                                </Form.Group>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label className='fw-bold'>Full Name</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Enter your full name"
+                                                    value={inputData.fullName}
+                                                    onChange={(event) => { handleChange("fullName", event.target.value) }} />
+                                            </Form.Group>
 
-                                <Form.Group className="mb-3">
-                                    <Form.Label className='fw-bold'>Role</Form.Label>
-                                    <Form.Select
-                                        onChange={(event) => { handleChange("role", event.target.value) }}
-                                        value={data.role}
-                                    >
-                                        <option value="" defaultValue disabled hidden>Select here</option>
-                                        <option value={"pasien"}>Pasien</option>
-                                        <option value={"doctor"}>Doctor</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label className='fw-bold'>Role</Form.Label>
+                                                <Form.Select
+                                                    onChange={(event) => { handleChange("role", event.target.value) }}
+                                                    value={inputData.role}
+                                                >
+                                                    <option value="" defaultValue disabled hidden>Select here</option>
+                                                    <option value={"pasien"}>Pasien</option>
+                                                    <option value={"doctor"}>Doctor</option>
+                                                </Form.Select>
+                                            </Form.Group>
 
-                                {selectDepartemen()}
+                                            {selectDepartemen()}
+                                            {handleError()}
 
-                                <Form.Group className="mt-4 mb-3">
-                                    <Form.Control type="submit" value={ui.buttonText} />
-                                </Form.Group>
+                                            <Form.Group className="mt-4 mb-3">
+                                                <Form.Control type="submit" value={ui.buttonText} />
+                                            </Form.Group>
 
-                                <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
-                                    {ui.hrefText}
-                                </NavLink>
-                                </Card.Text>
+
+                                            <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
+                                                {ui.hrefText}
+                                            </NavLink>
+                                            </Card.Text>
+                                        </>
+                                    )}
                             </Form >
                         </Col>
                         <Col sm={10} lg={5} className='d-flex align-items-center justify-content-center'>
@@ -185,25 +179,3 @@ export default function RegisterPage() {
         </div>
     )
 }
-
-    // const additionalForm = () => {
-    //     return (
-    //         <>
-    //             <Form.Group className="mb-3">
-    //                 <Form.Label className='fw-bold'>Full Name</Form.Label>
-    //                 <Form.Control type="text" placeholder="Enter your full name" />
-    //             </Form.Group>
-    //             <Form.Group className="mb-3">
-    //                 <Form.Label className='fw-bold'>User</Form.Label>
-    //                 <Form.Select
-    //                     onChange={(e) => changeUser(e.target.value)}
-    //                     value={user}
-    //                 >
-    //                     <option value={"pasien"}>Pasien</option>
-    //                     <option value={"doctor"}>Doctor</option>
-    //                 </Form.Select>
-    //             </Form.Group>
-    //             {selectDepartemen()}
-    //         </>
-    //     )
-    // }

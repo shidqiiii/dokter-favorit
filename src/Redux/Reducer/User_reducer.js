@@ -1,5 +1,5 @@
 const initState = {
-    token: '',
+
 };
 
 export const userReducer = (state = initState, action) => {

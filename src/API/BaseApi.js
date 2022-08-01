@@ -1,12 +1,12 @@
 import axios from "axios";
 
 class BaseApi {
-    static baseUrl = "https://dokter-favorit.herokuapp.com/";
+    static baseUrl = "https://dokter-favorit-v1.herokuapp.com/";
 
-    static async Login(email, password) {
+    static async UserLogin(email, password) {
         let result = null;
 
-        await axios.post(BaseApi.baseUrl + 'auth/logIn', {
+        await axios.post(BaseApi.baseUrl + 'users/login', {
             email: email,
             password: password
         })
@@ -21,15 +21,14 @@ class BaseApi {
         return result
     }
 
-    static async Register(email, password, name, role, departement) {
+    static async UserRegister(name, email, password, role) {
         let result = null;
 
-        await axios.post(BaseApi.baseUrl + 'auth/Register', {
+        await axios.post(BaseApi.baseUrl + 'users/register', {
+            name: name,
             email: email,
             password: password,
-            name: name,
-            role: role,
-            departement: departement
+            role: role
         })
             .then((response) => {
                 // console.log(response);
@@ -42,19 +41,63 @@ class BaseApi {
         return result
     }
 
-
-    static async allDepartement() {
+    static async GetAllDepartments() {
         let result = null;
 
-        await axios.get(BaseApi.baseUrl + 'dept/')
+        await axios.get(BaseApi.baseUrl + 'departments')
             .then((response) => {
                 // console.log(response);
                 result = response.data;
             })
             .catch((error) => {
-                console.log(error);
+                result = error.response.data;
             })
-        // console.log(result);
+        // console.log("result: ", result);
+        return result
+    }
+
+    static async GetAllDoctors(id) {
+        let result = null;
+
+        await axios.get(BaseApi.baseUrl + `users?role=dokter&id_department=${id}`)
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
+
+    static async GetDetailDoctor(id) {
+        let result = null;
+
+        await axios.get(BaseApi.baseUrl + `users/dokter/${id}`)
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
+
+    static async GetAllUsers() {
+        let result = null;
+
+        await axios.get(BaseApi.baseUrl + 'users?role=pasien')
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
         return result
     }
 }
