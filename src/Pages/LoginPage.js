@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Alert, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { connect } from "react-redux";
 import { updateUser } from '../Redux/Action/User_action';
 import Cookies from 'js-cookie'
@@ -45,7 +45,7 @@ function LoginPage(props) {
             // props.dispatch(updateUser({
             //     token: data.token
             // }));
-            const expired = new Date(new Date().getTime() + 30 * 1000);
+            const expired = new Date(new Date().getTime() + 60 * 60 * 1000);
             Cookies.set('token', data.token, { expires: expired });
             navigate('/dashboard');
         } else if (data.error === "ERROR") {
@@ -110,9 +110,9 @@ function LoginPage(props) {
                                     <Form.Control type="submit" value={ui.buttonText} />
                                 </Form.Group>
 
-                                <Card.Text className='text-center'>{ui.text} have an account? <a href={`/${ui.href}`}>
+                                <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
                                     {ui.hrefText}
-                                </a>
+                                </NavLink>
                                 </Card.Text>
                             </Form >
                         </Col>

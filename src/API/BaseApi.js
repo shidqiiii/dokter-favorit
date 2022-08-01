@@ -21,6 +21,28 @@ class BaseApi {
         return result
     }
 
+    static async Register(email, password, name, role, departement) {
+        let result = null;
+
+        await axios.post(BaseApi.baseUrl + 'auth/Register', {
+            email: email,
+            password: password,
+            name: name,
+            role: role,
+            departement: departement
+        })
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
+
+
     static async allDepartement() {
         let result = null;
 

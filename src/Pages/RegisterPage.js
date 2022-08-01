@@ -3,6 +3,7 @@ import { Card, Col, Container, Form, Row } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
 import axios from "axios";
 import { BaseApi } from '../API/BaseApi';
+import { NavLink } from 'react-router-dom';
 // import FormComponent from '../Components/Entry Page/FormComponent'
 
 const ui =
@@ -36,7 +37,6 @@ export default function RegisterPage() {
 
     const handleAllDepartement = async () => {
         const data = await BaseApi.allDepartement();
-        // console.log(data.data);
         if (data.status === "SUCCESS") {
             setDepartementList(data.data)
         }
@@ -47,7 +47,7 @@ export default function RegisterPage() {
     }, [])
 
 
-    const handleRegisterDoctor = async () => {
+    const handleRegister = async () => {
         let result = null;
 
         await axios.post("https://3853-114-5-147-212.ap.ngrok.io/auth/Register", {
@@ -86,12 +86,7 @@ export default function RegisterPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (data.role === 'doctor') {
-            handleRegisterDoctor()
-        }
-        // else {
-        //     handleRegisterPasien()
-        // }
+        handleRegister();
     }
 
     const selectDepartemen = () => {
@@ -175,9 +170,9 @@ export default function RegisterPage() {
                                     <Form.Control type="submit" value={ui.buttonText} />
                                 </Form.Group>
 
-                                <Card.Text className='text-center'>{ui.text} have an account? <a href={`/${ui.href}`}>
+                                <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
                                     {ui.hrefText}
-                                </a>
+                                </NavLink>
                                 </Card.Text>
                             </Form >
                         </Col>

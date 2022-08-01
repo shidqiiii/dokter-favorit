@@ -16,12 +16,12 @@ export default function Routing() {
         <Router>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/Login" element={<LoginPage />} />
-                <Route path="/Register" element={<RegisterPage />} />
+                <Route path="/login" element={<NormalRoute Component={LoginPage} />} />
+                <Route path="/register" element={<NormalRoute Component={RegisterPage} />} />
 
                 {/* Middleware */}
-                <Route path="/Dashboard" element={<ProtectedRoute Component={DashboardPage} />} />
-                <Route path="/Appointment" element={<ProtectedRoute Component={AppointmentPage} />} />
+                <Route path="/dashboard" element={<ProtectedRoute Component={DashboardPage} />} />
+                <Route path="/appointment" element={<ProtectedRoute Component={AppointmentPage} />} />
                 <Route path="/doctor" element={<ProtectedRoute Component={DoctorListPage} />} />
                 <Route path="/doctor/:key" element={<ProtectedRoute Component={DoctorDetailPage} />} />
                 <Route path="/history" element={<ProtectedRoute Component={HistoryPage} />} />
@@ -35,6 +35,11 @@ export default function Routing() {
 const ProtectedRoute = ({ Component }) => {
     const auth = Cookies.get('token')
     // const auth = true; //your logic
-
     return auth ? <Component /> : <Navigate to="/login" />
+}
+
+const NormalRoute = ({ Component }) => {
+    const auth = Cookies.get('token')
+    // const auth = true; //your logic
+    return auth ? <Navigate to="/dashboard" /> : <Component />
 }
