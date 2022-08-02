@@ -3,8 +3,9 @@ import { Card, Container, Table } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { BaseApi } from '../../API/BaseApi';
 import Template from '../../Components/Dashboard Page/Template'
+import { connect } from "react-redux";
 
-export default function DoctorDetailPage() {
+function DoctorDetailPage(props) {
     const { key } = useParams();
 
     const handleDoctorDetail = async (id) => {
@@ -24,7 +25,6 @@ export default function DoctorDetailPage() {
     const content = () => {
         return (
             <div className="doctor-detail">
-                {console.log(doctorDetail)}
                 <Container>
                     <Card>
                         <Card.Body>
@@ -34,11 +34,40 @@ export default function DoctorDetailPage() {
                                 <div>
                                     <Card.Title className='fw-bold fs-4'>Dr. {doctorDetail.name}</Card.Title>
                                     <Card.Text>{doctorDetail.description}</Card.Text>
-                                    <Card.Text>Nomer Telepon: {doctorDetail.phone_number}</Card.Text>
-                                    <Card.Text>Email: {doctorDetail.email}</Card.Text>
-                                    <Card.Text>Biaya: {doctorDetail.price_hour}</Card.Text>
                                 </div>
                             </div>
+
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th colSpan={2} className='text-center'>Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Department</td>
+                                        <td> Department {props.departmentsReducer.filter(e => e.id === doctorDetail.id_department).map(e => e.name)
+                                        }</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Email</td>
+                                        <td>{doctorDetail.email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Phone Number</td>
+                                        <td>{doctorDetail.phone_number}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Price per Hour</td>
+                                        <td>IDR {doctorDetail.price_hour}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                         </Card.Body>
                     </Card>
                 </Container>
@@ -50,3 +79,9 @@ export default function DoctorDetailPage() {
         <Template content={content()} />
     )
 }
+
+const mapStateToProps = state => ({
+    departmentsReducer: state.departmentsReducer
+});
+
+export default connect(mapStateToProps)(DoctorDetailPage);

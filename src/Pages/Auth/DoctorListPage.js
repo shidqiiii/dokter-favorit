@@ -3,24 +3,16 @@ import { Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { BaseApi } from '../../API/BaseApi';
 import Template from '../../Components/Dashboard Page/Template'
+import { connect } from "react-redux";
 
-export default function DoctorListPage() {
+function DoctorListPage(props) {
     const navigate = useNavigate();
     const navigateToDoctorDetail = (key) => {
         navigate(`/doctor/${key}`);
-        // window.location.reload();
     };
 
-    const [departementList, setDepartementList] = useState([]);
     const [DoctorList, setDoctorList] = useState([]);
-    const [idDepartments, setidDepartments] = useState(1)
-
-    const handleAllDepartments = async () => {
-        const data = await BaseApi.GetAllDepartments();
-        if (data.status === "SUCCESS") {
-            setDepartementList(data.data);
-        }
-    };
+    const [idDepartments, setidDepartments] = useState(1);
 
     const handleDoctorsPerDepartments = async (id) => {
         const data = await BaseApi.GetAllDoctors(id);
@@ -36,11 +28,9 @@ export default function DoctorListPage() {
     }
 
     useEffect(() => {
-        handleAllDepartments()
         handleDoctorsPerDepartments(idDepartments);
 
     }, [idDepartments])
-
 
     const content = () => {
         return (
@@ -55,7 +45,7 @@ export default function DoctorListPage() {
                                     <Form.Select
                                         onChange={(event) => { SelectDepartment(event.target.value) }}
                                         value={idDepartments}>
-                                        {departementList.map(item => (
+                                        {props.departmentsReducer.map(item => (
                                             <option value={item.id} key={item.id}>{item.name}</option>
                                         ))}
                                     </Form.Select>
@@ -75,7 +65,7 @@ export default function DoctorListPage() {
                     <div className="doctor-card-list mt-4">
                         {DoctorList.length !== 0 ?
                             (
-                                <Row xs={1} md={2} lg={4} className="g-3">
+                                <Row xs={1} md={2} lg={3} className="g-3">
                                     {DoctorList.map((item) => (
                                         <Col key={item.id}>
                                             <Card className='p-3'
@@ -83,9 +73,13 @@ export default function DoctorListPage() {
                                                 <Card.Body className='p-0 gap-3 d-flex flex-row align-items-center'>
                                                     <Card.Img src="./Image/doctor.png" />
                                                     <div>
-                                                        <Card.Title className='fw-bold m-0 fs-6'>{item.name}</Card.Title>
+                                                        <Card.Title className='fw-bold fs-5 my-1'>Dr. {item.name}</Card.Title>
+                                                        <Card.Title className='fs-6 my-1'>
+                                                            Department {props.departmentsReducer.filter(e => e.id === item.id_department).map(e => e.name)
+                                                            }
+                                                        </Card.Title>
                                                         <Card.Text className=' p-0 m-0'>{item.phone_number}</Card.Text>
-                                                        <Card.Text className='p-0 m-0'>IDR {item.price_hour.toLocaleString("id-ID")}</Card.Text>
+                                                        <Card.Text className='p-0 m-0'>{item.email}</Card.Text>
                                                     </div>
                                                 </Card.Body>
                                             </Card>
@@ -109,6 +103,14 @@ export default function DoctorListPage() {
     }
 
     return (
-        <Template content={content()} />
+        <>
+            <Template content={content()} />
+        </>
     )
 }
+
+const mapStateToProps = state => ({
+    departmentsReducer: state.departmentsReducer
+});
+
+export default connect(mapStateToProps)(DoctorListPage);

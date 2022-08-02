@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { BaseApi } from './API/BaseApi';
+import { getDepartments } from './Redux/Action/Department_action';
+import { connect } from "react-redux";
 import Routing from "./Routes/Routing";
 
-function App() {
+function App(props) {
+  const handleAllDepartments = async () => {
+    const data = await BaseApi.GetAllDepartments();
+    if (data.status === "SUCCESS") {
+      // setDepartementList(data.data);
+      props.dispatch(getDepartments(data.data));
+    }
+  };
+
+  useEffect(() => {
+    handleAllDepartments();
+  }, [])
+
+
+
   return (
     <div className="App">
       <Routing />
@@ -9,4 +26,9 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  departmentsReducer: state.departmentsReducer
+});
+
+
+export default connect(mapStateToProps)(App);

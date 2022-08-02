@@ -87,8 +87,8 @@
   .doctor-content {
     .card-img {
       @include imageRounded($lightblue);
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
     }
 
     .card-title,

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Card, Col, Container, Form, Row, Alert } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
-import axios from "axios";
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
@@ -39,10 +38,10 @@ export default function RegisterPage() {
         setinputError("")
     }
 
-    const handleLoginUser = async () => {
+    const handleRegisterUser = async () => {
         const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role);
         if (data.status === "SUCCESS") {
-            console.log("sucess");
+            // console.log("sucess");
             navigate('/login');
         } else {
             setinputError(data.message);
@@ -55,7 +54,7 @@ export default function RegisterPage() {
         e.preventDefault();
         setIsLoading(true);
         setTimeout(() => {
-            handleLoginUser();
+            handleRegisterUser();
         }, 1000);
 
 
