@@ -32,9 +32,19 @@ function DoctorListPage(props) {
 
     }, [idDepartments])
 
+    const [search, setSearch] = useState("");
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
+
     const content = () => {
         return (
             <div className="doctor-list">
+                {console.log(DoctorList
+                    .filter(item =>
+                        item.name.toLowerCase().includes(search.toLowerCase())))}
                 <Container>
                     <Card>
                         <Card.Body>
@@ -55,6 +65,7 @@ function DoctorListPage(props) {
                                     <Form.Control
                                         type="search"
                                         placeholder="Enter doctor name"
+                                        onChange={handleSearch}
                                     />
                                 </Form.Group>
 
@@ -66,25 +77,28 @@ function DoctorListPage(props) {
                         {DoctorList.length !== 0 ?
                             (
                                 <Row xs={1} md={2} lg={3} className="g-3">
-                                    {DoctorList.map((item) => (
-                                        <Col key={item.id}>
-                                            <Card className='p-3'
-                                                onClick={() => navigateToDoctorDetail(item.id)}>
-                                                <Card.Body className='p-0 gap-3 d-flex flex-row align-items-center'>
-                                                    <Card.Img src="./Image/doctor.png" />
-                                                    <div>
-                                                        <Card.Title className='fw-bold fs-5 my-1'>Dr. {item.name}</Card.Title>
-                                                        <Card.Title className='fs-6 my-1'>
-                                                            Department {props.departmentsReducer.filter(e => e.id === item.id_department).map(e => e.name)
-                                                            }
-                                                        </Card.Title>
-                                                        <Card.Text className=' p-0 m-0'>{item.phone_number}</Card.Text>
-                                                        <Card.Text className='p-0 m-0'>{item.email}</Card.Text>
-                                                    </div>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    ))}
+                                    {DoctorList
+                                        .filter(item =>
+                                            item.name.toLowerCase().includes(search.toLowerCase()))
+                                        .map((item) => (
+                                            <Col key={item.id}>
+                                                <Card className='p-3'
+                                                    onClick={() => navigateToDoctorDetail(item.id)}>
+                                                    <Card.Body className='p-0 gap-3 d-flex flex-row align-items-center'>
+                                                        <Card.Img src="./Image/doctor.png" />
+                                                        <div>
+                                                            <Card.Title className='fw-bold fs-5 my-1'>Dr. {item.name}</Card.Title>
+                                                            <Card.Title className='fs-6 my-1'>
+                                                                Department {props.departmentsReducer.filter(e => e.id === item.id_department).map(e => e.name)
+                                                                }
+                                                            </Card.Title>
+                                                            <Card.Text className=' p-0 m-0'>{item.phone_number}</Card.Text>
+                                                            <Card.Text className='p-0 m-0'>{item.email}</Card.Text>
+                                                        </div>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                        ))}
                                 </Row>
                             )
                             :
