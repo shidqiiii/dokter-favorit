@@ -4,6 +4,7 @@ import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
+import { connect } from "react-redux";
 // import FormComponent from '../Components/Entry Page/FormComponent'
 
 const ui =
@@ -16,7 +17,7 @@ const ui =
     href: "login",
 }
 
-export default function RegisterPage() {
+function RegisterPage(props) {
     const [inputData, setInputData] = useState({
         name: "",
         email: "",
@@ -75,10 +76,10 @@ export default function RegisterPage() {
                 <Form.Group className="mb-3">
                     <Form.Label className='fw-bold'>Departement</Form.Label>
                     <Form.Select
-                        onChange={(event) => { handleChange("departement", event.target.value) }}
-                        value={inputData.departement}>
+                        onChange={(event) => { handleChange("id_departement", event.target.value) }}
+                        value={inputData.id_departement}>
                         <option value="" defaultValue disabled hidden>Select here</option>
-                        {inputData.map(item => (
+                        {props.departmentsReducer.map(item => (
                             <option value={item.id} key={item.id}>{item.name}</option>
                         ))}
                     </Form.Select>
@@ -178,3 +179,9 @@ export default function RegisterPage() {
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    departmentsReducer: state.departmentsReducer
+});
+
+export default connect(mapStateToProps)(RegisterPage);
