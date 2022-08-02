@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Container, Table } from 'react-bootstrap'
+import { useParams } from 'react-router-dom';
+import { BaseApi } from '../../API/BaseApi';
 import Template from '../../Components/Dashboard Page/Template'
 
 export default function DoctorDetailPage() {
+    const { key } = useParams();
+
+    const handleDoctorDetail = async (id) => {
+        const data = await BaseApi.GetDetailDoctor(id);
+        if (data.error === "SUCCESS") {
+            setDoctorDetail(data.data[0]);
+        }
+    };
+
+    const [doctorDetail, setDoctorDetail] = useState([]);
+
+    useEffect(() => {
+        handleDoctorDetail(key);
+    }, [key]);
+
+
     const content = () => {
         return (
             <div className="doctor-detail">
+                {console.log(doctorDetail)}
                 <Container>
                     <Card>
                         <Card.Body>
@@ -13,39 +32,12 @@ export default function DoctorDetailPage() {
                             <div className="doctor-content d-flex align-items-center p-4 gap-4">
                                 <Card.Img src="../Image/doctor.png" />
                                 <div>
-                                    <Card.Title className='fw-bold fs-4'>Dr. Richald Legirsson</Card.Title>
-                                    <Card.Text>Dr. Richald Legirsson merupakan spesialist Jantung dan Paru</Card.Text>
-                                    <Card.Title className='fs-6'>Whatsapp: 081X XXX XXX</Card.Title>
-                                    <Card.Title className='fs-6'>Email: email@email.com</Card.Title>
+                                    <Card.Title className='fw-bold fs-4'>Dr. {doctorDetail.name}</Card.Title>
+                                    <Card.Text>{doctorDetail.description}</Card.Text>
+                                    <Card.Text>Nomer Telepon: {doctorDetail.phone_number}</Card.Text>
+                                    <Card.Text>Email: {doctorDetail.email}</Card.Text>
+                                    <Card.Text>Biaya: {doctorDetail.price_hour}</Card.Text>
                                 </div>
-                            </div>
-                            <div className="doctor-schedule">
-                                <Card style={{ width: "30rem" }}>
-                                    <Card.Body>
-                                        <Card.Title className='fs-6'>Schedule Doctor</Card.Title>
-                                        <Table striped bordered hover size="sm">
-                                            <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>25 January 2022</td>
-                                                    <td>2 PM - 7 PM</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>27 January 2022</td>
-                                                    <td>2 PM - 7 PM</td>
-                                                </tr>
-                                            </tbody>
-                                        </Table>
-                                    </Card.Body>
-                                </Card>
                             </div>
                         </Card.Body>
                     </Card>

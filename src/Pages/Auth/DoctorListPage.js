@@ -76,10 +76,10 @@ export default function DoctorListPage() {
                         {DoctorList.length !== 0 ?
                             (
                                 <Row xs={1} md={2} lg={4} className="g-3">
-                                    {DoctorList.map((item, idx) => (
-                                        <Col key={idx}>
+                                    {DoctorList.map((item) => (
+                                        <Col key={item.id}>
                                             <Card className='p-3'
-                                                onClick={() => navigateToDoctorDetail(idx)}>
+                                                onClick={() => navigateToDoctorDetail(item.id)}>
                                                 <Card.Body className='p-0 gap-3 d-flex flex-row align-items-center'>
                                                     <Card.Img src="./Image/doctor.png" />
                                                     <div>
