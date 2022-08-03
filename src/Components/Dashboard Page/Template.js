@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaBars } from "react-icons/fa";
 import { AiOutlineDashboard, AiOutlineSchedule, AiOutlineUnorderedList, AiOutlineHistory } from "react-icons/ai";
 import { RiHospitalLine } from "react-icons/ri";
@@ -6,7 +6,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import '../../CSS/Dashboard Page/DashboardPage.css';
 import { Card, Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 import Cookies from 'js-cookie';
-import { BaseApi } from '../../API/BaseApi';
 
 export default function Template(props) {
     const [isOpen, setIsOpen] = useState(true);
@@ -36,6 +35,12 @@ export default function Template(props) {
 
     const navigate = useNavigate();
 
+    const handleProfile = () => {
+        let data = Cookies.get('data');
+        data = JSON.parse(data)
+        return data;
+    }
+
     const handleSignOut = () => {
         Cookies.remove('data');
         navigate('/login');
@@ -62,13 +67,13 @@ export default function Template(props) {
                     <div className='icon-nav'>
                         <FaBars onClick={toggle} size={20} />
                     </div>
-                    <DropdownButton title="Robert Richalisson" align="end">
+                    <DropdownButton title={"Halo " + handleProfile().name} align="end">
                         <Dropdown.Item as="button">Profile</Dropdown.Item>
                         <Dropdown.Item as="button" onClick={handleSignOut}>Sign out</Dropdown.Item>
                     </DropdownButton>
                 </Navbar>
                 {props.content}
             </main>
-        </div>
+        </div >
     );
 }

@@ -33,13 +33,13 @@ export default function Routing() {
 }
 
 const ProtectedRoute = ({ Component }) => {
-    const auth = Cookies.get('token')
+    const auth = Cookies.get('data')
     // const auth = true; //your logic
     return auth ? <Component /> : <Navigate to="/login" />
 }
 
 const NormalRoute = ({ Component }) => {
-    const auth = Cookies.get('token')
+    const auth = Cookies.get('data')
     // const auth = true; //your logic
     return auth ? <Navigate to="/dashboard" /> : <Component />
 }

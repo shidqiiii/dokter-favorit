@@ -9,7 +9,6 @@ export default function DashboardPage() {
     const navigate = useNavigate();
     const navigateToHistory = () => {
         navigate('/history');
-        // window.location.reload();
     };
 
     const content = () => {

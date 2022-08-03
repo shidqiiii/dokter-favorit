@@ -1,5 +1,4 @@
 import axios from "axios";
-import moment from 'moment';
 
 class BaseApi {
     static baseUrl = "https://dokter-favorit-v1.herokuapp.com/";
@@ -112,14 +111,46 @@ class BaseApi {
         let result = null;
 
         await axios.post(BaseApi.baseUrl + 'appoinments', {
-            start: moment(start).toISOString(),
-            end: moment(end).toISOString(),
+            start: start,
+            end: end,
             id_department: id_department,
             id_doctor: id_doctor,
             id_pasien: id_pasien,
             catatan_keluhan: catatan_keluhan,
             total: total
         })
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
+
+    static async GetAppointment(id_user) {
+        let result = null;
+
+        await axios.get(BaseApi.baseUrl + 'appoinments/', {
+            id_user: id_user
+        })
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
+
+    static async GetDetailAppointment(id) {
+        let result = null;
+
+        await axios.get(BaseApi.baseUrl + `appoinments/${id}`)
             .then((response) => {
                 // console.log(response);
                 result = response.data;

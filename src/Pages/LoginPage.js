@@ -5,7 +5,7 @@ import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
-
+import { connect } from "react-redux";
 
 // import FormComponent from '../Components/Entry Page/FormComponent'
 
@@ -19,7 +19,7 @@ const ui = {
     href: "register",
 }
 
-export default function LoginPage() {
+function LoginPage(props) {
     const [inputData, setInputData] = useState({
         email: "",
         password: "",
@@ -42,8 +42,9 @@ export default function LoginPage() {
     const handleLoginUser = async () => {
         const data = await BaseApi.UserLogin(inputData.email, inputData.password);
         if (data.status === "SUCCESS") {
+            const feedback = { 'name': data.name, 'email': data.email, 'id': data.id, 'token': data.token }
             const expired = new Date(new Date().getTime() + 60 * 60 * 1000);
-            Cookies.set('token', data.token, { expires: expired });
+            Cookies.set('data', JSON.stringify(feedback), { expires: expired });
             navigate('/dashboard');
         } else if (data.error === "ERROR") {
             setinputError(data.message);
@@ -141,3 +142,10 @@ export default function LoginPage() {
         </div>
     )
 }
+
+
+const mapStateToProps = state => ({
+    userReducer: state.userReducer
+});
+
+export default connect(mapStateToProps)(LoginPage);

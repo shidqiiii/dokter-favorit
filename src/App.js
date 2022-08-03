@@ -26,7 +26,7 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  departmentsReducer: state.departmentsReducer
+  departmentsReducer: state.departmentsReducer,
 });
 
 

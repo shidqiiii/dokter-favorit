@@ -22,7 +22,8 @@ function RegisterPage(props) {
         name: "",
         email: "",
         password: "",
-        role: ""
+        role: "",
+        department: ""
     });
 
     const [isLoading, setIsLoading] = useState(false)
@@ -40,7 +41,7 @@ function RegisterPage(props) {
     }
 
     const handleRegisterUser = async () => {
-        const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role);
+        const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role, inputData.department);
         if (data.status === "SUCCESS") {
             // console.log("sucess");
             navigate('/login');
@@ -179,6 +180,8 @@ function RegisterPage(props) {
         </div>
     )
 }
+
+
 
 const mapStateToProps = state => ({
     departmentsReducer: state.departmentsReducer

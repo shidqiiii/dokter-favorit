@@ -2,7 +2,7 @@ const initState = [];
 
 export const departmentsReducer = (state = initState, action) => {
     switch (action.type) {
-        case "GET":
+        case "GETDEPART":
             return [...action.payload];
         default:
             return state;

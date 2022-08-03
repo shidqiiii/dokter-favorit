@@ -1,4 +1,4 @@
 export const getDepartments = value => ({
-    type: "GET",
+    type: "GETDEPART",
     payload: value
 });
