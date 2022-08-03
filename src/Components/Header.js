@@ -1,7 +1,14 @@
 import React from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Header() {
+    const navigate = useNavigate();
+    const handleButton = () => {
+        navigate('/login');
+    }
+
+
     return (
         <div id='header' className="py-5">
             <Container>
@@ -13,7 +20,8 @@ export default function Header() {
                                 <Card.Text className='my-3'>
                                     Assertively parallel task team driven delverables with resource-leveling services. Competently transform technically sound strategic theme areas before competitive data.
                                 </Card.Text>
-                                <Button>Request an Appoitments</Button>
+                                <Button
+                                    onClick={handleButton}>Request an Appoitments</Button>
                             </Card.Body>
                         </Card>
                     </Col>
