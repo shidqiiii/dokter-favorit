@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from 'moment';
 
 class BaseApi {
     static baseUrl = "https://dokter-favorit-v1.herokuapp.com/";
@@ -21,15 +22,21 @@ class BaseApi {
         return result
     }
 
-    static async UserRegister(name, email, password, role) {
+    static async UserRegister(name, email, password, role, id_department) {
         let result = null;
-
-        await axios.post(BaseApi.baseUrl + 'users/register', {
+        let payload = {
             name: name,
             email: email,
             password: password,
-            role: role
-        })
+            role: role,
+            id_department: id_department
+        }
+
+        if (role === "pasien") {
+            delete payload.id_department
+        }
+
+        await axios.post(BaseApi.baseUrl + 'users/register', payload)
             .then((response) => {
                 // console.log(response);
                 result = response.data;
@@ -90,6 +97,29 @@ class BaseApi {
         let result = null;
 
         await axios.get(BaseApi.baseUrl + 'users?role=pasien')
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
+
+    static async CreateAppointment(start, end, id_department, id_doctor, id_pasien, catatan_keluhan, total) {
+        let result = null;
+
+        await axios.post(BaseApi.baseUrl + 'appoinments', {
+            start: moment(start).toISOString(),
+            end: moment(end).toISOString(),
+            id_department: id_department,
+            id_doctor: id_doctor,
+            id_pasien: id_pasien,
+            catatan_keluhan: catatan_keluhan,
+            total: total
+        })
             .then((response) => {
                 // console.log(response);
                 result = response.data;

@@ -37,7 +37,7 @@ export default function Template(props) {
     const navigate = useNavigate();
 
     const handleSignOut = () => {
-        Cookies.remove('token');
+        Cookies.remove('data');
         navigate('/login');
     }
 

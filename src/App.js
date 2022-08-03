@@ -8,7 +8,6 @@ function App(props) {
   const handleAllDepartments = async () => {
     const data = await BaseApi.GetAllDepartments();
     if (data.status === "SUCCESS") {
-      // setDepartementList(data.data);
       props.dispatch(getDepartments(data.data));
     }
   };
