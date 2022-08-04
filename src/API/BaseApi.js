@@ -1,7 +1,9 @@
 import axios from "axios";
+import moment from "moment";
 
 class BaseApi {
-    static baseUrl = "https://dokter-favorit-v1.herokuapp.com/";
+    // static baseUrl = "https://dokter-favorit-v1.herokuapp.com/";
+    static baseUrl = "http://localhost:4200/";
 
     static async UserLogin(email, password) {
         let result = null;
@@ -107,8 +109,11 @@ class BaseApi {
         return result
     }
 
-    static async CreateAppointment(start, end, id_department, id_doctor, id_pasien, catatan_keluhan, total) {
+    static async CreateAppointment(date, duration, id_department, id_doctor, id_pasien, catatan_keluhan, total) {
         let result = null;
+
+        let start = moment(date).toISOString();
+        let end = moment(start).add(duration, 'hours').toISOString();
 
         await axios.post(BaseApi.baseUrl + 'appoinments', {
             start: start,

@@ -4,7 +4,6 @@ import Template from '../../Components/Dashboard Page/Template'
 import { connect } from "react-redux";
 import { BaseApi } from '../../API/BaseApi';
 import Cookies from 'js-cookie';
-import moment from 'moment';
 
 function AppointmentPage(props) {
 
@@ -15,9 +14,7 @@ function AppointmentPage(props) {
     }
 
     const [inputData, setInputData] = useState({
-        start: "",
-        end: "",
-        id_departement: "",
+        id_department: "",
         id_doctor: "",
         id_pasien: handleProfile().id,
         catatan_keluhan: "",
@@ -26,7 +23,7 @@ function AppointmentPage(props) {
         duration: ""
     });
 
-    const [inputError, setinputError] = useState("")
+    // const [inputError, setinputError] = useState("")
 
     // HandleChange
     const handleChange = (target, value) => {
@@ -34,14 +31,8 @@ function AppointmentPage(props) {
             ...inputData,
             [target]: value
         });
-        setinputError("")
+        // setinputError("")
     }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(inputData);
-    }
-
     const [DoctorList, setDoctorList] = useState([]);
 
     const handleDoctorsPerDepartments = async (id) => {
@@ -53,24 +44,38 @@ function AppointmentPage(props) {
         }
     };
 
-    const handleStartTime = (event) => {
-        handleChange("date", event.target.value);
+    const handleCreateAppointment = async () => {
+        const data = await BaseApi.CreateAppointment(inputData.date, inputData.duration, inputData.id_department, inputData.id_doctor, inputData.id_pasien, inputData.catatan_keluhan, inputData.total);
+        if (data.status === "SUCCESS") {
+            console.log("sucess");
+        } else {
+            // setinputError(data.message);
+        }
+    };
 
-        const start = moment(event.target.value).toISOString();
-        handleChange("start", start);
+    const handleTotalPrice = () => {
+        let doctorPrice = DoctorList
+            .filter(e => e.id === parseInt(inputData.id_doctor))
+            .map(e => e.price_hour)
+
+        let total = parseInt(inputData.duration) * doctorPrice;
+
+
+        if (inputData.id_doctor !== "" & inputData.duration !== "") {
+            return total
+        }
     }
 
-    const handleEndTime = (event) => {
-        handleChange("duration", event.target.value);
-
-        const end = moment(inputData.start).add(event.target.value, 'hours').toISOString();
-        console.log(end);
-        // handleChange("end", end);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(inputData);
+        handleCreateAppointment();
     }
 
     useEffect(() => {
-        handleDoctorsPerDepartments(inputData.id_departement);
-    }, [inputData.id_departement])
+        handleDoctorsPerDepartments(inputData.id_department);
+        handleChange("total", handleTotalPrice());
+    }, [inputData.id_department, handleTotalPrice()])
 
     const content = () => {
         return (
@@ -83,9 +88,10 @@ function AppointmentPage(props) {
                                 <Form.Group className="mb-3">
                                     <Form.Label>Kategori</Form.Label>
                                     <Form.Select
-                                        onChange={(event) => { handleChange("id_departement", event.target.value) }}
-                                        value={inputData.id_departement}
-                                        required>
+                                        onChange={(event) => { handleChange("id_department", event.target.value) }}
+                                        value={inputData.id_department}
+                                        required
+                                    >
                                         <option value="" defaultValue disabled hidden>Select here</option>
                                         {props.departmentsReducer.map(item => (
                                             <option value={item.id} key={item.id}>{item.name}</option>
@@ -98,7 +104,7 @@ function AppointmentPage(props) {
                                     <Form.Select
                                         onChange={(event) => { handleChange("id_doctor", event.target.value) }}
                                         value={inputData.id_doctor}
-                                        disabled={inputData.id_departement === "" ? true : false}
+                                        disabled={inputData.id_department === "" ? true : false}
                                         required
                                     >
                                         <option value="" defaultValue disabled hidden>Select here</option>
@@ -127,7 +133,7 @@ function AppointmentPage(props) {
                                     <Form.Label>Pilih Tanggal</Form.Label>
                                     <Form.Control
                                         type="datetime-local"
-                                        onChange={handleStartTime}
+                                        onChange={(event) => handleChange("date", event.target.value)}
                                         value={inputData.date}
                                         required
                                     />
@@ -136,7 +142,7 @@ function AppointmentPage(props) {
                                 <Form.Group className="mb-3">
                                     <Form.Label>Durasi</Form.Label>
                                     <Form.Select
-                                        onChange={handleEndTime}
+                                        onChange={(event) => handleChange("duration", event.target.value)}
                                         value={inputData.duration}
                                         required
                                     >
@@ -146,6 +152,16 @@ function AppointmentPage(props) {
                                         <option value={3} >3 Jam</option>
                                     </Form.Select>
                                 </Form.Group>
+
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Biaya</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={"Rp " + handleTotalPrice()?.toLocaleString('id-ID') || ''}
+                                        disabled
+                                    />
+                                </Form.Group>
+
 
                                 <Button variant="primary" type="submit">Create Appointment</Button>
                             </Form>
