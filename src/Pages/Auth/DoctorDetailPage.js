@@ -64,7 +64,7 @@ function DoctorDetailPage(props) {
                                     <tr>
                                         <td>4</td>
                                         <td>Price per Hour</td>
-                                        <td>IDR {doctorDetail.price_hour}</td>
+                                        <td>IDR {doctorDetail.price_hour?.toLocaleString('id-ID') || ''}</td>
                                     </tr>
                                 </tbody>
                             </Table>

@@ -135,12 +135,10 @@ class BaseApi {
         return result
     }
 
-    static async GetAppointment(id_user) {
+    static async GetAppointment(id) {
         let result = null;
 
-        await axios.get(BaseApi.baseUrl + 'appoinments/', {
-            id_user: id_user
-        })
+        await axios.get(BaseApi.baseUrl + `appoinments/?id_user=${id}`)
             .then((response) => {
                 // console.log(response);
                 result = response.data;
