@@ -5,6 +5,7 @@ import { Button, Card, Container, Table } from 'react-bootstrap'
 import { BaseApi } from '../../API/BaseApi';
 import Template from '../../Components/Dashboard Page/Template'
 import { connect } from "react-redux";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function HistoryPage(props) {
     const handleProfile = () => {
@@ -40,6 +41,22 @@ function HistoryPage(props) {
         handleDoctors("")
     }, [])
 
+    const navigate = useNavigate();
+    const navigateToPage = (page, key) => {
+        switch (page) {
+            case 'DetailHistory':
+                navigate(`/history/${key}`);
+                break;
+
+            case 'Payment':
+                navigate(`/payment/${key}`);
+                break;
+
+            default:
+                break;
+        }
+    };
+
     const content = () => {
         return (
             <div className="history">
@@ -53,9 +70,9 @@ function HistoryPage(props) {
                                         <th>#</th>
                                         <th>Nama Doctor</th>
                                         <th>Department</th>
-                                        <th>Status Pembayaran</th>
-                                        <th>Price</th>
-                                        <th>Tanggal & Jam</th>
+                                        <th>Status Payment</th>
+                                        <th>Total Payment</th>
+                                        <th>Date & Time</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -64,7 +81,7 @@ function HistoryPage(props) {
                                         <tr key={item.id}>
                                             <td>{index + 1}</td>
                                             <td>
-                                                {"Dr " + DoctorList.filter(e => e.id === 2).map(e => e.name)
+                                                {"Dr " + DoctorList.filter(e => e.id === item.id_doctor).map(e => e.name)
                                                 }
                                             </td>
                                             <td>
@@ -76,8 +93,16 @@ function HistoryPage(props) {
                                             <td>{moment(item.start).format("DD MMM YYYY hh:mm") + "-" + moment(item.end).format("hh:mm")}</td>
                                             <td>
                                                 <div className='d-flex align-items-center justify-content-center gap-2'>
-                                                    <Button size="sm">Pembayaran</Button>
-                                                    <Button size="sm">Detail</Button>
+                                                    <Button
+                                                        size="sm"
+                                                        onClick={() => navigateToPage("Payment", item.id)}
+                                                    >
+                                                        Pembayaran</Button>
+                                                    <Button
+                                                        size="sm"
+                                                        onClick={() => navigateToPage("DetailHistory", item.id)}
+                                                    >
+                                                        Detail</Button>
                                                 </div>
                                             </td>
                                         </tr>

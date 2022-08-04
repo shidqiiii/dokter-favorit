@@ -10,6 +10,8 @@ import DoctorListPage from '../Pages/Auth/DoctorListPage';
 import DoctorDetailPage from '../Pages/Auth/DoctorDetailPage';
 import HistoryPage from '../Pages/Auth/HistoryPage';
 import Cookies from 'js-cookie';
+import HistoryDetailPage from '../Pages/Auth/HistoryDetailPage';
+import PaymentPage from '../Pages/Auth/PaymentPage';
 
 export default function Routing() {
     return (
@@ -25,6 +27,8 @@ export default function Routing() {
                 <Route path="/doctor" element={<ProtectedRoute Component={DoctorListPage} />} />
                 <Route path="/doctor/:key" element={<ProtectedRoute Component={DoctorDetailPage} />} />
                 <Route path="/history" element={<ProtectedRoute Component={HistoryPage} />} />
+                <Route path="/history/:key" element={<ProtectedRoute Component={HistoryDetailPage} />} />
+                <Route path="/payment/:key" element={<ProtectedRoute Component={PaymentPage} />} />
 
                 <Route path="*" element={<NotFoundPage replace to="/404" />} />
             </Routes>

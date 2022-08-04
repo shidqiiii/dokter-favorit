@@ -164,6 +164,28 @@ class BaseApi {
         // console.log("result: ", result);
         return result
     }
+
+    static async CreatePayment(payment_type, bank, id_appointment, total) {
+        let result = null;
+
+        await axios.post(BaseApi.baseUrl + 'payments', {
+            payment_type: payment_type,
+            bank_transfer: {
+                bank: bank
+            },
+            id_appointment: id_appointment,
+            total: total
+        })
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
 }
 
 export { BaseApi }

@@ -33,6 +33,7 @@ function AppointmentPage(props) {
         });
         // setinputError("")
     }
+
     const [DoctorList, setDoctorList] = useState([]);
 
     const handleDoctorsPerDepartments = async (id) => {
@@ -63,7 +64,7 @@ function AppointmentPage(props) {
 
         if (inputData.id_doctor !== "" & inputData.duration !== "") {
             return total
-        }
+        } return 0
     }
 
     const handleSubmit = (e) => {
@@ -77,7 +78,7 @@ function AppointmentPage(props) {
         handleChange("total", handleTotalPrice());
     }, [inputData.id_department, handleTotalPrice()])
 
-    const content = () => {
+    function content() {
         return (
             <div className="appointment">
                 <Container>
@@ -88,7 +89,7 @@ function AppointmentPage(props) {
                                 <Form.Group className="mb-3">
                                     <Form.Label>Kategori</Form.Label>
                                     <Form.Select
-                                        onChange={(event) => { handleChange("id_department", event.target.value) }}
+                                        onChange={(event) => { handleChange("id_department", event.target.value); }}
                                         value={inputData.id_department}
                                         required
                                     >
@@ -102,7 +103,7 @@ function AppointmentPage(props) {
                                 <Form.Group className="mb-3">
                                     <Form.Label>Doctor</Form.Label>
                                     <Form.Select
-                                        onChange={(event) => { handleChange("id_doctor", event.target.value) }}
+                                        onChange={(event) => { handleChange("id_doctor", event.target.value); }}
                                         value={inputData.id_doctor}
                                         disabled={inputData.id_department === "" ? true : false}
                                         required
@@ -113,10 +114,7 @@ function AppointmentPage(props) {
                                                 <option value={item.id} key={item.id}>{item.name}</option>
                                             )))
                                             :
-                                            (<option value={0} defaultValue disabled>Tidak ada dokter</option>)
-
-
-                                        }
+                                            (<option value={0} defaultValue disabled>Tidak ada dokter</option>)}
                                     </Form.Select>
                                 </Form.Group>
 
@@ -124,9 +122,8 @@ function AppointmentPage(props) {
                                     <Form.Label>Keluhan</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        onChange={(event) => { handleChange("catatan_keluhan", event.target.value) }}
-                                        value={inputData.catatan_keluhan}
-                                    />
+                                        onChange={(event) => { handleChange("catatan_keluhan", event.target.value); }}
+                                        value={inputData.catatan_keluhan} />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3">
@@ -135,8 +132,7 @@ function AppointmentPage(props) {
                                         type="datetime-local"
                                         onChange={(event) => handleChange("date", event.target.value)}
                                         value={inputData.date}
-                                        required
-                                    />
+                                        required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3">
@@ -147,9 +143,9 @@ function AppointmentPage(props) {
                                         required
                                     >
                                         <option value="" defaultValue disabled hidden>Select here</option>
-                                        <option value={1} >1 Jam</option>
-                                        <option value={2} >2 Jam</option>
-                                        <option value={3} >3 Jam</option>
+                                        <option value={1}>1 Jam</option>
+                                        <option value={2}>2 Jam</option>
+                                        <option value={3}>3 Jam</option>
                                     </Form.Select>
                                 </Form.Group>
 
@@ -158,8 +154,7 @@ function AppointmentPage(props) {
                                     <Form.Control
                                         type="text"
                                         value={"Rp " + handleTotalPrice()?.toLocaleString('id-ID') || ''}
-                                        disabled
-                                    />
+                                        disabled />
                                 </Form.Group>
 
 
@@ -169,7 +164,7 @@ function AppointmentPage(props) {
                     </Card>
                 </Container>
             </div>
-        )
+        );
     }
 
     return (
