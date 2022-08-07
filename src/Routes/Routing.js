@@ -18,17 +18,52 @@ export default function Routing() {
         <Router>
             <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<NormalRoute Component={LoginPage} />} />
-                <Route path="/register" element={<NormalRoute Component={RegisterPage} />} />
 
-                {/* Middleware */}
-                <Route path="/dashboard" element={<ProtectedRoute Component={DashboardPage} />} />
-                <Route path="/appointment" element={<ProtectedRoute Component={AppointmentPage} />} />
-                <Route path="/doctor" element={<ProtectedRoute Component={DoctorListPage} />} />
-                <Route path="/doctor/:key" element={<ProtectedRoute Component={DoctorDetailPage} />} />
-                <Route path="/history" element={<ProtectedRoute Component={HistoryPage} />} />
-                <Route path="/history/:key" element={<ProtectedRoute Component={HistoryDetailPage} />} />
-                <Route path="/payment/:key" element={<ProtectedRoute Component={PaymentPage} />} />
+                <Route path="/login" element={
+                    <NormalRoute>
+                        <LoginPage />
+                    </NormalRoute>} />
+
+                <Route path="/register" element={
+                    <NormalRoute>
+                        <RegisterPage />
+                    </NormalRoute>} />
+
+                {/* Auth */}
+                <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                        <DashboardPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/appointment" element={
+                    <ProtectedRoute>
+                        <AppointmentPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/doctor" element={
+                    <ProtectedRoute>
+                        <DoctorListPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/doctor/:key" element={
+                    <ProtectedRoute>
+                        <DoctorDetailPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/history" element={
+                    <ProtectedRoute>
+                        <HistoryPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/history/:key" element={
+                    <ProtectedRoute>
+                        <HistoryDetailPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/payment/:key" element={
+                    <ProtectedRoute>
+                        <PaymentPage />
+                    </ProtectedRoute>} />
 
                 <Route path="*" element={<NotFoundPage replace to="/404" />} />
             </Routes>
@@ -36,14 +71,16 @@ export default function Routing() {
     )
 }
 
-const ProtectedRoute = ({ Component }) => {
-    const auth = Cookies.get('data')
-    // const auth = true; //your logic
-    return auth ? <Component /> : <Navigate to="/login" />
+const ProtectedRoute = (props) => {
+    const data = JSON.parse(Cookies.get('data'))
+    const auth = data.token
+
+    return auth ? props.children : <Navigate to="/login" />
 }
 
-const NormalRoute = ({ Component }) => {
-    const auth = Cookies.get('data')
-    // const auth = true; //your logic
-    return auth ? <Navigate to="/dashboard" /> : <Component />
+const NormalRoute = (props) => {
+    const data = JSON.parse(Cookies.get('data'))
+    const auth = data.token
+
+    return auth ? <Navigate to="/dashboard" /> : props.children
 }
