@@ -72,14 +72,16 @@ export default function Routing() {
 }
 
 const ProtectedRoute = (props) => {
-    const data = JSON.parse(Cookies.get('data'))
+    let data = Cookies.get('data')
+    data ? data = JSON.parse(data) : data = "";
     const auth = data.token
 
     return auth ? props.children : <Navigate to="/login" />
 }
 
 const NormalRoute = (props) => {
-    const data = JSON.parse(Cookies.get('data'))
+    let data = Cookies.get('data')
+    data ? data = JSON.parse(data) : data = "";
     const auth = data.token
 
     return auth ? <Navigate to="/dashboard" /> : props.children

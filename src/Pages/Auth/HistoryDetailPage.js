@@ -37,7 +37,7 @@ function HistoryDetailPage(props) {
     const content = () => {
         return (
             <div className="history-detail">
-                <Container>
+                <Container fluid>
                     <Card>
                         <Card.Body>
                             <Card.Title className='mb-3'>History Appointment</Card.Title>

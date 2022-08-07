@@ -60,11 +60,11 @@ function HistoryPage(props) {
     const content = () => {
         return (
             <div className="history">
-                <Container>
+                <Container fluid>
                     <Card>
                         <Card.Body>
                             <Card.Title>History</Card.Title>
-                            <Table hover className='text-center'>
+                            <Table hover className='text-center' responsive>
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -88,7 +88,7 @@ function HistoryPage(props) {
                                                 {"Department " + props.departmentsReducer.filter(e => e.id === item.id_department).map(e => e.name)
                                                 }
                                             </td>
-                                            <td>{item.is_paid ? "sudah" : "belum"}</td>
+                                            <td>{item.is_paid ? "paid" : "not paid"}</td>
                                             <td>{"Rp " + item.total?.toLocaleString('id-ID') || ''}</td>
                                             <td>{moment(item.start).format("DD MMM YYYY hh:mm") + "-" + moment(item.end).format("hh:mm")}</td>
                                             <td>

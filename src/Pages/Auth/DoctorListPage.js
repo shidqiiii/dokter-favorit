@@ -45,7 +45,7 @@ function DoctorListPage(props) {
                 {console.log(DoctorList
                     .filter(item =>
                         item.name.toLowerCase().includes(search.toLowerCase())))}
-                <Container>
+                <Container fluid>
                     <Card>
                         <Card.Body>
                             <Card.Title className='mb-3'>List Doctor</Card.Title>

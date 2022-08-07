@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Card, Container, Form } from 'react-bootstrap'
 import Template from '../../Components/Dashboard Page/Template'
 import { connect } from "react-redux";
 import { BaseApi } from '../../API/BaseApi';
 import Cookies from 'js-cookie';
 
 function AppointmentPage(props) {
-
     const handleProfile = () => {
         let data = Cookies.get('data');
         data = JSON.parse(data)
@@ -23,7 +22,7 @@ function AppointmentPage(props) {
         duration: ""
     });
 
-    // const [inputError, setinputError] = useState("")
+    const [inputError, setinputError] = useState("")
 
     // HandleChange
     const handleChange = (target, value) => {
@@ -31,7 +30,7 @@ function AppointmentPage(props) {
             ...inputData,
             [target]: value
         });
-        // setinputError("")
+        setinputError("")
     }
 
     const [DoctorList, setDoctorList] = useState([]);
@@ -50,7 +49,7 @@ function AppointmentPage(props) {
         if (data.status === "SUCCESS") {
             console.log("sucess");
         } else {
-            // setinputError(data.message);
+            setinputError(data.message);
         }
     };
 
@@ -69,8 +68,16 @@ function AppointmentPage(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(inputData);
         handleCreateAppointment();
+    }
+
+    const handleError = () => {
+        if (inputError !== "") {
+            return (
+                <Alert variant="danger">
+                    {inputError}
+                </Alert>)
+        }
     }
 
     useEffect(() => {
@@ -81,7 +88,7 @@ function AppointmentPage(props) {
     function content() {
         return (
             <div className="appointment">
-                <Container>
+                <Container fluid>
                     <Card>
                         <Card.Body>
                             <Card.Title className='mb-3'>Make an Appointment</Card.Title>
@@ -157,6 +164,7 @@ function AppointmentPage(props) {
                                         disabled />
                                 </Form.Group>
 
+                                {handleError()}
 
                                 <Button variant="primary" type="submit">Create Appointment</Button>
                             </Form>

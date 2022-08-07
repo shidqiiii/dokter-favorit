@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import { Alert, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import Spinner from 'react-bootstrap/Spinner';
+import Loader from '../Components/Loader'
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
-import { connect } from "react-redux";
-
-// import FormComponent from '../Components/Entry Page/FormComponent'
-
 
 const ui = {
     headerTitle: "Welcome back",
@@ -19,7 +15,7 @@ const ui = {
     href: "register",
 }
 
-function LoginPage(props) {
+export default function LoginPage() {
     const [inputData, setInputData] = useState({
         email: "",
         password: "",
@@ -30,7 +26,6 @@ function LoginPage(props) {
 
     const navigate = useNavigate();
 
-    // HandleChange
     const handleChange = (target, value) => {
         setInputData({
             ...inputData,
@@ -73,8 +68,6 @@ function LoginPage(props) {
     }
 
     return (
-        // <FormComponent
-        //     ui={ui} />
         <div className="entry">
             <Container>
                 <Card className='mx-5 shadow-lg'>
@@ -92,11 +85,7 @@ function LoginPage(props) {
 
                                 {isLoading ?
                                     (
-                                        <div className='text-center'>
-                                            <Spinner animation="border" role="status">
-                                                <span className="visually-hidden">Loading...</span>
-                                            </Spinner>
-                                        </div>
+                                        <Loader />
                                     )
                                     :
                                     (
@@ -106,7 +95,7 @@ function LoginPage(props) {
                                                 <Form.Control
                                                     type="email"
                                                     placeholder="Enter your email"
-                                                    value={inputData.firstName}
+                                                    value={inputData.email}
                                                     onChange={(event) => { handleChange("email", event.target.value) }} />
                                             </Form.Group>
 
@@ -142,10 +131,3 @@ function LoginPage(props) {
         </div>
     )
 }
-
-
-const mapStateToProps = state => ({
-    userReducer: state.userReducer
-});
-
-export default connect(mapStateToProps)(LoginPage);

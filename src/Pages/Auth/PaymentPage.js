@@ -55,7 +55,7 @@ export default function PaymentPage() {
     const content = () => {
         return (
             <div className="payment">
-                <Container>
+                <Container fluid>
                     <Card>
                         <Card.Body>
                             <Card.Title className='mb-3'>Make an Appointment</Card.Title>
