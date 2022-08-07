@@ -5,17 +5,12 @@ import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
-
-const ui = {
-    headerTitle: "Welcome back",
-    headerCaption: "Welcome back! Please enter your details.",
-    buttonText: "Sign in",
-    text: "Don't",
-    hrefText: "Sign up",
-    href: "register",
-}
+import FormControl from '../Components/Form/FormGroupControl';
+import FormTemplate from '../Components/Form/FormTemplate';
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+
     const [inputData, setInputData] = useState({
         email: "",
         password: "",
@@ -23,8 +18,6 @@ export default function LoginPage() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [inputError, setinputError] = useState("")
-
-    const navigate = useNavigate();
 
     const handleChange = (target, value) => {
         setInputData({
@@ -54,8 +47,6 @@ export default function LoginPage() {
         setTimeout(() => {
             handleLoginUser();
         }, 1000);
-
-
     }
 
     const handleError = () => {
@@ -67,66 +58,54 @@ export default function LoginPage() {
         }
     }
 
+    const handleForm = () => {
+        if (!isLoading) {
+            return (<>
+                <FormControl
+                    name="Email"
+                    type="Email"
+                    value={inputData.email}
+                    onChange={(event) => { handleChange("email", event.target.value) }} />
+
+                <FormControl
+                    name="Password"
+                    type="Password"
+                    value={inputData.password}
+                    onChange={(event) => { handleChange("password", event.target.value) }} />
+
+                {handleError()}
+
+                <FormControl
+                    type="Submit"
+                    value="Sign in" />
+
+                <Card.Text className='text-center'>Don't have an account? <NavLink to={`/register`}>
+                    Sign Up
+                </NavLink>
+                </Card.Text>
+            </>)
+        }
+        return <Loader />
+
+    }
+
     return (
         <div className="entry">
             <Container>
-                <Card className='mx-5 shadow-lg'>
-                    <Row className='d-flex align-items-center justify-content-center py-5'>
-                        <Col sm={10} lg={5} className='my-auto px-5'>
-                            <Form onSubmit={handleSubmit}>
-                                <header className='mb-3 text-center'>
-                                    <Card.Title className='fw-bold fs-2 my-0'>
-                                        {ui.headerTitle}
-                                    </Card.Title>
-                                    <Card.Text>
-                                        {ui.headerCaption}
-                                    </Card.Text>
-                                </header>
+                <FormTemplate>
+                    <Form onSubmit={handleSubmit}>
+                        <header className='mb-3 text-center'>
+                            <Card.Title className='fw-bold fs-2 my-0'>
+                                Welcome back
+                            </Card.Title>
+                            <Card.Text>
+                                Welcome back! Please enter your details.
+                            </Card.Text>
+                        </header>
 
-                                {isLoading ?
-                                    (
-                                        <Loader />
-                                    )
-                                    :
-                                    (
-                                        <>
-                                            <Form.Group className="mb-3">
-                                                <Form.Label className='fw-bold'>Email Address</Form.Label>
-                                                <Form.Control
-                                                    type="email"
-                                                    placeholder="Enter your email"
-                                                    value={inputData.email}
-                                                    onChange={(event) => { handleChange("email", event.target.value) }} />
-                                            </Form.Group>
-
-                                            <Form.Group className="mb-3">
-                                                <Form.Label className='fw-bold'>Password</Form.Label>
-                                                <Form.Control
-                                                    type="password"
-                                                    placeholder="*******"
-                                                    value={inputData.password}
-                                                    onChange={(event) => { handleChange("password", event.target.value) }} />
-                                            </Form.Group>
-
-                                            {handleError()}
-
-                                            <Form.Group className="mt-4 mb-3">
-                                                <Form.Control type="submit" value={ui.buttonText} />
-                                            </Form.Group>
-
-                                            <Card.Text className='text-center'>{ui.text} have an account? <NavLink to={`/${ui.href}`}>
-                                                {ui.hrefText}
-                                            </NavLink>
-                                            </Card.Text>
-                                        </>
-                                    )}
-                            </Form >
-                        </Col>
-                        <Col sm={10} lg={5} className='d-flex align-items-center justify-content-center'>
-                            <Card.Img variant="top" src="./Image/login-illustrator.png" />
-                        </Col>
-                    </Row>
-                </Card>
+                        {handleForm()}
+                    </Form >
+                </FormTemplate>
             </Container>
         </div>
     )
