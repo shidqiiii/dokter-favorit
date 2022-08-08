@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Alert, Card, Container, Form } from 'react-bootstrap';
 import Loader from '../Components/Loader'
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
@@ -92,20 +92,11 @@ export default function LoginPage() {
     return (
         <div className="entry">
             <Container>
-                <FormTemplate>
-                    <Form onSubmit={handleSubmit}>
-                        <header className='mb-3 text-center'>
-                            <Card.Title className='fw-bold fs-2 my-0'>
-                                Welcome back
-                            </Card.Title>
-                            <Card.Text>
-                                Welcome back! Please enter your details.
-                            </Card.Text>
-                        </header>
-
-                        {handleForm()}
-                    </Form >
-                </FormTemplate>
+                <FormTemplate
+                    handleSubmit={handleSubmit}
+                    handleForm={handleForm()}
+                    title={"Welcome back"}
+                    heading={"Welcome back! Please enter your details."} />
             </Container>
         </div>
     )
