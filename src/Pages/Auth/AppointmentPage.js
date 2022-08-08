@@ -6,6 +6,7 @@ import { BaseApi } from '../../API/BaseApi';
 import Cookies from 'js-cookie';
 import FormGroupControl from '../../Components/Form/FormGroupControl';
 import FormGroupSelect from '../../Components/Form/FormGroupSelect';
+import FormTemplate from '../../Components/Form/FormTemplate';
 
 function AppointmentPage(props) {
     const handleProfile = () => {
@@ -85,6 +86,68 @@ function AppointmentPage(props) {
         handleChange("total", handleTotalPrice());
     }, [inputData.id_department, handleTotalPrice()])
 
+    const handleForm = () => {
+        return (
+            <Form onSubmit={handleSubmit}>
+                <FormGroupSelect
+                    name="Department"
+                    value={inputData.id_department}
+                    onChange={(event) => { handleChange("id_department", event.target.value) }}>
+                    {props.departmentsReducer.map(item => (
+                        <option value={item.id} key={item.id}>{item.name}</option>
+                    ))}
+                </FormGroupSelect>
+
+                <FormGroupSelect
+                    name="Doctor"
+                    value={inputData.id_doctor}
+                    onChange={(event) => { handleChange("id_doctor", event.target.value) }}
+                    disabled={inputData.id_department === "" ? true : false}>
+                    {DoctorList.length !== 0 ?
+                        (DoctorList.map(item => (
+                            <option value={item.id} key={item.id}>{item.name}</option>
+                        )))
+                        :
+                        (<option value={0} defaultValue disabled>Tidak ada dokter</option>)}
+                </FormGroupSelect>
+
+                <FormGroupControl
+                    name="Complaint"
+                    type="text"
+                    value={inputData.catatan_keluhan}
+                    onChange={(event) => { handleChange("catatan_keluhan", event.target.value) }} />
+
+                <FormGroupControl
+                    name="Pilih Tanggal"
+                    type="datetime-local"
+                    value={inputData.date}
+                    onChange={(event) => { handleChange("date", event.target.value) }} />
+
+                <FormGroupSelect
+                    name="Durasi"
+                    value={inputData.duration}
+                    onChange={(event) => { handleChange("duration", event.target.value) }}>
+                    {(Array.from({ length: 3 }).map((_, idx) => (
+                        <option value={idx + 1} key={idx + 1}>{idx + 1} Jam</option>
+                    )))}
+                </FormGroupSelect>
+
+                <FormGroupControl
+                    name="Biaya"
+                    type="text"
+                    value={"Rp " + handleTotalPrice()?.toLocaleString('id-ID') || ''}
+                    disabled={true} />
+
+                {handleError()}
+
+                <FormControl
+                    type="Submit"
+                    value="Create Appointment"
+                    className='btn-primary p-2' />
+            </Form>
+        )
+    }
+
     function content() {
         return (
             <div className="appointment">
@@ -92,63 +155,9 @@ function AppointmentPage(props) {
                     <Card>
                         <Card.Body>
                             <Card.Title className='mb-3'>Make an Appointment</Card.Title>
-                            <Form onSubmit={handleSubmit}>
-                                <FormGroupSelect
-                                    name="Department"
-                                    value={inputData.id_department}
-                                    onChange={(event) => { handleChange("id_department", event.target.value) }}>
-                                    {props.departmentsReducer.map(item => (
-                                        <option value={item.id} key={item.id}>{item.name}</option>
-                                    ))}
-                                </FormGroupSelect>
-
-                                <FormGroupSelect
-                                    name="Doctor"
-                                    value={inputData.id_doctor}
-                                    onChange={(event) => { handleChange("id_doctor", event.target.value) }}
-                                    disabled={inputData.id_department === "" ? true : false}>
-                                    {DoctorList.length !== 0 ?
-                                        (DoctorList.map(item => (
-                                            <option value={item.id} key={item.id}>{item.name}</option>
-                                        )))
-                                        :
-                                        (<option value={0} defaultValue disabled>Tidak ada dokter</option>)}
-                                </FormGroupSelect>
-
-                                <FormGroupControl
-                                    name="Complaint"
-                                    type="text"
-                                    value={inputData.catatan_keluhan}
-                                    onChange={(event) => { handleChange("catatan_keluhan", event.target.value) }} />
-
-                                <FormGroupControl
-                                    name="Pilih Tanggal"
-                                    type="datetime-local"
-                                    value={inputData.date}
-                                    onChange={(event) => { handleChange("date", event.target.value) }} />
-
-                                <FormGroupSelect
-                                    name="Durasi"
-                                    value={inputData.duration}
-                                    onChange={(event) => { handleChange("duration", event.target.value) }}>
-                                    {(Array.from({ length: 3 }).map((_, idx) => (
-                                        <option value={idx + 1} key={idx + 1}>{idx + 1} Jam</option>
-                                    )))}
-                                </FormGroupSelect>
-
-                                <FormGroupControl
-                                    name="Biaya"
-                                    type="text"
-                                    value={"Rp " + handleTotalPrice()?.toLocaleString('id-ID') || ''}
-                                    disabled={true} />
-
-                                {handleError()}
-
-                                <FormControl
-                                    type="Submit"
-                                    value="Create Appointment"
-                                    className='btn-primary p-2' />
-                            </Form>
+                            <FormTemplate
+                                handleSubmit={handleSubmit}
+                                handleForm={handleForm()} />
                         </Card.Body>
                     </Card>
                 </Container>

@@ -81,8 +81,6 @@ function HistoryDetailPage(props) {
                                         <td>Payment Status</td>
                                         <td>{historyDetail.is_paid ? "paid" : "not paid"}</td>
                                     </tr>
-
-
                                 </tbody>
                             </Table>
                         </Card.Body>

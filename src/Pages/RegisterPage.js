@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Container, Form, Alert } from 'react-bootstrap';
+import { Card, Container, Form, Alert, Row, Col } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -125,11 +125,21 @@ function RegisterPage(props) {
     return (
         <div className="entry">
             <Container>
-                <FormTemplate
-                    handleSubmit={handleSubmit}
-                    handleForm={handleForm()}
-                    title={"Create an account"}
-                    heading={"Let's get started."} />
+                <Card className='mx-5 shadow-lg'>
+                    <Row className='d-flex align-items-center justify-content-center py-5'>
+                        <Col sm={10} lg={5} className='my-auto px-5'>
+                            <FormTemplate
+                                handleSubmit={handleSubmit}
+                                handleForm={handleForm()}
+                                title={"Create an account"}
+                                heading={"Let's get started."} />
+
+                        </Col>
+                        <Col sm={10} lg={5} className='d-flex align-items-center justify-content-center'>
+                            <Card.Img variant="top" src="./Image/login-illustrator.png" />
+                        </Col>
+                    </Row>
+                </Card>
             </Container>
         </div>
     )

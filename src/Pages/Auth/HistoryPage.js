@@ -107,7 +107,6 @@ function HistoryPage(props) {
                                             </td>
                                         </tr>
                                     ))}
-
                                 </tbody>
                             </Table>
                         </Card.Body>
