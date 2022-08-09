@@ -5,7 +5,7 @@ import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
-import FormControl from '../Components/Form/FormGroupControl';
+import FormGroupControl from '../Components/Form/FormGroupControl';
 import FormTemplate from '../Components/Form/FormTemplate';
 
 export default function LoginPage() {
@@ -27,20 +27,6 @@ export default function LoginPage() {
         setinputError("")
     }
 
-    const handleLoginUser = async () => {
-        const data = await BaseApi.UserLogin(inputData.email, inputData.password);
-        if (data.status === "SUCCESS") {
-            const feedback = { 'name': data.name, 'email': data.email, 'id': data.id, 'token': data.token }
-            const expired = new Date(new Date().getTime() + 60 * 60 * 1000);
-            Cookies.set('data', JSON.stringify(feedback), { expires: expired });
-            navigate('/dashboard');
-        } else if (data.error === "ERROR") {
-            setinputError(data.message);
-        }
-
-        setIsLoading(false);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -61,13 +47,13 @@ export default function LoginPage() {
     const handleForm = () => {
         if (!isLoading) {
             return (<>
-                <FormControl
+                <FormGroupControl
                     name="Email"
                     type="Email"
                     value={inputData.email}
                     onChange={(event) => { handleChange("email", event.target.value) }} />
 
-                <FormControl
+                <FormGroupControl
                     name="Password"
                     type="Password"
                     value={inputData.password}
@@ -75,7 +61,7 @@ export default function LoginPage() {
 
                 {handleError()}
 
-                <FormControl
+                <FormGroupControl
                     type="Submit"
                     value="Sign in" />
 
@@ -88,6 +74,20 @@ export default function LoginPage() {
         return <Loader />
 
     }
+
+    const handleLoginUser = async () => {
+        const data = await BaseApi.UserLogin(inputData.email, inputData.password);
+        if (data.status === "SUCCESS") {
+            const feedback = { 'name': data.name, 'email': data.email, 'id': data.id, 'token': data.token }
+            const expired = new Date(new Date().getTime() + 60 * 60 * 1000);
+            Cookies.set('data', JSON.stringify(feedback), { expires: expired });
+            navigate('/dashboard');
+        } else if (data.error === "ERROR") {
+            setinputError(data.message);
+        }
+
+        setIsLoading(false);
+    };
 
     return (
         <div className="entry">

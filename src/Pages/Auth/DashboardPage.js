@@ -20,7 +20,7 @@ export default function DashboardPage() {
 
                         <Card.Text>Hello, Welcome back to DoctorFav App.</Card.Text>
 
-                        <Row xs={1} md={3} className="g-4 mb-3">
+                        <Row sm={1} md={3} className="g-4 mb-3">
                             {["Appointment", "Doctor", "History"].map((item, idx) => (
                                 <Col key={idx}>
                                     <Card onClick={() => navigateToPage(item)} style={{ cursor: "pointer" }}>

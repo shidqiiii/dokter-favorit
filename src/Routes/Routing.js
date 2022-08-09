@@ -12,6 +12,7 @@ import HistoryPage from '../Pages/Auth/HistoryPage';
 import Cookies from 'js-cookie';
 import HistoryDetailPage from '../Pages/Auth/HistoryDetailPage';
 import PaymentPage from '../Pages/Auth/PaymentPage';
+import PaymentDetailPage from '../Pages/Auth/PaymentDetailPage';
 
 export default function Routing() {
     return (
@@ -63,6 +64,11 @@ export default function Routing() {
                 <Route path="/payment/:key" element={
                     <ProtectedRoute>
                         <PaymentPage />
+                    </ProtectedRoute>} />
+
+                <Route path="/payment/detail/:key" element={
+                    <ProtectedRoute>
+                        <PaymentDetailPage />
                     </ProtectedRoute>} />
 
                 <Route path="*" element={<NotFoundPage replace to="/404" />} />

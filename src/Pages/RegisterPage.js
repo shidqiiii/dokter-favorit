@@ -5,8 +5,8 @@ import { BaseApi } from '../API/BaseApi';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { connect } from "react-redux";
 import Loader from '../Components/Loader';
-import FormControl from '../Components/Form/FormGroupControl';
-import FormSelect from '../Components/Form/FormGroupSelect';
+import FormGroupControl from '../Components/Form/FormGroupControl';
+import FormGroupSelect from '../Components/Form/FormGroupSelect';
 import FormTemplate from '../Components/Form/FormTemplate';
 
 function RegisterPage(props) {
@@ -31,18 +31,6 @@ function RegisterPage(props) {
         setinputError("")
     }
 
-    const handleRegisterUser = async () => {
-        const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role, inputData.department);
-        if (data.status === "SUCCESS") {
-            // console.log("sucess");
-            navigate('/login');
-        } else {
-            setinputError(data.message);
-        }
-
-        setIsLoading(false);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -63,36 +51,36 @@ function RegisterPage(props) {
     const handleForm = () => {
         if (!isLoading) {
             return (<>
-                <FormControl
+                <FormGroupControl
                     name="Full Name"
                     type="Text"
                     value={inputData.fullName}
                     onChange={(event) => { handleChange("fullName", event.target.value) }} />
 
-                <FormControl
+                <FormGroupControl
                     name="Email"
                     type="Email"
                     value={inputData.email}
                     onChange={(event) => { handleChange("email", event.target.value) }} />
 
-                <FormControl
+                <FormGroupControl
                     name="Password"
                     type="Password"
                     value={inputData.password}
                     onChange={(event) => { handleChange("password", event.target.value) }} />
 
-                <FormSelect
+                <FormGroupSelect
                     name="Role"
                     value={inputData.role}
                     onChange={(event) => { handleChange("role", event.target.value) }}>
                     <option value={"pasien"}>Pasien</option>
                     <option value={"doctor"}>Doctor</option>
-                </FormSelect>
+                </FormGroupSelect>
 
                 {selectDepartemen()}
                 {handleError()}
 
-                <FormControl
+                <FormGroupControl
                     type="Submit"
                     value="Create Account" />
 
@@ -110,17 +98,28 @@ function RegisterPage(props) {
     const selectDepartemen = () => {
         if (inputData.role === 'doctor') {
             return (
-                <FormSelect
+                <FormGroupSelect
                     name="Departement"
                     value={inputData.id_departement}
                     onChange={(event) => { handleChange("id_departement", event.target.value) }}>
                     {props.departmentsReducer.map(item => (
                         <option value={item.id} key={item.id}>{item.name}</option>
                     ))}
-                </FormSelect>
+                </FormGroupSelect>
             )
         }
     }
+
+    const handleRegisterUser = async () => {
+        const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role, inputData.department);
+        if (data.status === "SUCCESS") {
+            navigate('/login');
+        } else {
+            setinputError(data.message);
+        }
+
+        setIsLoading(false);
+    };
 
     return (
         <div className="entry">

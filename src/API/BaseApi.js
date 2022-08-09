@@ -186,6 +186,21 @@ class BaseApi {
         // console.log("result: ", result);
         return result
     }
+
+    static async GetDetailPayment(id) {
+        let result = null;
+
+        await axios.get(BaseApi.baseUrl + `payments/${id}`)
+            .then((response) => {
+                // console.log(response);
+                result = response.data;
+            })
+            .catch((error) => {
+                result = error.response.data;
+            })
+        // console.log("result: ", result);
+        return result
+    }
 }
 
 export { BaseApi }
