@@ -46,12 +46,17 @@ export default function PaymentDetailPage() {
                             <td>{detailPayment.transaction_id}</td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td>3</td>
+                            <td>Merchant Id</td>
+                            <td>{detailPayment.merchant_id}</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
                             <td>Transaction Time</td>
                             <td>{detailPayment.transaction_time}</td>
                         </tr>
                         <tr>
-                            <td>4</td>
+                            <td>5</td>
                             <td>Total</td>
                             <td>IDR {detailPayment.gross_amount}</td>
                         </tr>
