@@ -21,13 +21,13 @@ export default function PaymentDetailPage() {
 
     useEffect(() => {
         handlePaymentDetail(key)
-    }, [])
+    }, [key])
 
     const paymentDetail = () => {
         let result
         if (detailPayment !== null) {
             result = (
-                <Table striped bordered hover responsive>
+                <Table striped bordered hover responsive className='text-center'>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -57,6 +57,11 @@ export default function PaymentDetailPage() {
                         </tr>
                         <tr>
                             <td>5</td>
+                            <td>Status</td>
+                            <td>{detailPayment.status_message}</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
                             <td>Total</td>
                             <td>IDR {detailPayment.gross_amount}</td>
                         </tr>

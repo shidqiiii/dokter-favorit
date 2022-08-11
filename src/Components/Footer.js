@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap'
 
 export default function Footer() {
     return (
-        <footer>
+        <footer className='pb-3'>
             <ul className="nav justify-content-center border-bottom py-3 mb-3 gap-3">
                 <li className="nav-item">Home</li>
                 <li className="nav-item">Featured</li>

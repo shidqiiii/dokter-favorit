@@ -35,32 +35,27 @@ function DoctorDetailPage(props) {
                         </div>
                     </div>
 
-                    <Table striped bordered hover responsive>
+                    <Table striped bordered hover responsive className='text-center'>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th colSpan={2} className='text-center'>Information</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
                                 <td>Department</td>
                                 <td> Department {props.departmentsReducer.filter(e => e.id === doctorDetail.id_department).map(e => e.name)
                                 }</td>
                             </tr>
                             <tr>
-                                <td>2</td>
                                 <td>Email</td>
                                 <td>{doctorDetail.email}</td>
                             </tr>
                             <tr>
-                                <td>3</td>
                                 <td>Phone Number</td>
                                 <td>{doctorDetail.phone_number}</td>
                             </tr>
                             <tr>
-                                <td>4</td>
                                 <td>Price per Hour</td>
                                 <td>IDR {doctorDetail.price_hour?.toLocaleString('id-ID') || ''}</td>
                             </tr>

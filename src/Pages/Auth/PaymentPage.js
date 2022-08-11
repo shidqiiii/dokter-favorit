@@ -11,7 +11,6 @@ import Modals from '../../Components/Modals';
 
 export default function PaymentPage() {
     const { key } = useParams();
-    const navigate = useNavigate();
 
     const [dataPayment, setDataPayment] = useState({
         payment_type: "",
@@ -83,7 +82,7 @@ export default function PaymentPage() {
                     name="Payment Method"
                     value={dataPayment.payment_type}
                     onChange={(event) => { handleChange("payment_type", event.target.value) }}>
-                    <option value={'Permata'}>Bank Transfer</option>
+                    <option value={'bank_transfer'}>Bank Transfer</option>
                 </FormGroupSelect>
 
                 <FormGroupSelect

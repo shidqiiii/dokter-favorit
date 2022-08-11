@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Button, Card, Container, Form, FormControl } from 'react-bootstrap'
+import { Alert, Card, Container, Form } from 'react-bootstrap'
 import Template from '../../Components/Dashboard Page/Template'
 import { connect } from "react-redux";
 import { BaseApi } from '../../API/BaseApi';
@@ -8,11 +8,9 @@ import FormGroupControl from '../../Components/Form/FormGroupControl';
 import FormGroupSelect from '../../Components/Form/FormGroupSelect';
 import FormTemplate from '../../Components/Form/FormTemplate';
 import Loader from '../../Components/Loader';
-import { useNavigate } from 'react-router-dom';
 import Modals from '../../Components/Modals';
 
 function AppointmentPage(props) {
-    const navigate = useNavigate();
     const handleProfile = () => {
         let data = Cookies.get('data');
         data = JSON.parse(data)
@@ -103,9 +101,12 @@ function AppointmentPage(props) {
                     name="Department"
                     value={inputData.id_department}
                     onChange={(event) => { handleChange("id_department", event.target.value) }}>
-                    {props.departmentsReducer.map(item => (
-                        <option value={item.id} key={item.id}>{item.name}</option>
-                    ))}
+                    {props.departmentsReducer.length !== 0 ?
+                        (props.departmentsReducer.map(item => (
+                            <option value={item.id} key={item.id}>{item.name}</option>
+                        )))
+                        :
+                        (<option value={0} defaultValue disabled>Tidak ada department</option>)}
                 </FormGroupSelect>
 
                 <FormGroupSelect

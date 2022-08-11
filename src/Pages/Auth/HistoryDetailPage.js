@@ -39,42 +39,35 @@ function HistoryDetailPage(props) {
         let result
 
         if (historyDetail !== null) {
-            result = (<Table striped bordered hover>
+            result = (<Table striped bordered hover className='text-center'>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th colSpan={2} className='text-center'>Information</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
                         <td>Doctor</td>
                         <td> Dr. {DoctorList !== null ? (DoctorList[0].name) : ("")}</td>
                     </tr>
                     <tr>
-                        <td>2</td>
                         <td>Department</td>
                         <td> Department {props.departmentsReducer.filter(e => e.id === historyDetail.id_department).map(e => e.name)
                         }</td>
                     </tr>
                     <tr>
-                        <td>3</td>
                         <td>Date & Time</td>
                         <td> {moment(historyDetail.start).format("DD MMMM YYYY hh:mm") + "-" + moment(historyDetail.end).format("hh:mm")}</td>
                     </tr>
                     <tr>
-                        <td>4</td>
                         <td>Notes</td>
                         <td>{historyDetail.catatan_keluhan}</td>
                     </tr>
                     <tr>
-                        <td>5</td>
                         <td>Total Payment</td>
                         <td>Rp {historyDetail.total?.toLocaleString('id-ID') || ''}</td>
                     </tr>
                     <tr>
-                        <td>6</td>
                         <td>Payment Status</td>
                         <td>{historyDetail.is_paid ? "paid" : "not paid"}</td>
                     </tr>
@@ -89,7 +82,7 @@ function HistoryDetailPage(props) {
     const content = () => {
         return (
             <div className="history-detail">
-                <Container>
+                <Container fluid>
                     <Card>
                         <Card.Body>
                             <Card.Title className='mb-3'>History Appointment</Card.Title>

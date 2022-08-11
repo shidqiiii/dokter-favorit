@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Card, Container, Form, Alert, Row, Col } from 'react-bootstrap';
+import { Card, Container, Alert, Row, Col } from 'react-bootstrap';
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from "react-redux";
 import Loader from '../Components/Loader';
 import FormGroupControl from '../Components/Form/FormGroupControl';
@@ -11,8 +11,6 @@ import FormTemplate from '../Components/Form/FormTemplate';
 import Modals from '../Components/Modals';
 
 function RegisterPage(props) {
-    const navigate = useNavigate();
-
     const [inputData, setInputData] = useState({
         name: "",
         email: "",
@@ -56,8 +54,8 @@ function RegisterPage(props) {
                 <FormGroupControl
                     name="Full Name"
                     type="Text"
-                    value={inputData.fullName}
-                    onChange={(event) => { handleChange("fullName", event.target.value) }} />
+                    value={inputData.name}
+                    onChange={(event) => { handleChange("name", event.target.value) }} />
 
                 <FormGroupControl
                     name="Email"
@@ -97,21 +95,6 @@ function RegisterPage(props) {
 
     }
 
-    const selectDepartemen = () => {
-        if (inputData.role === 'doctor') {
-            return (
-                <FormGroupSelect
-                    name="Departement"
-                    value={inputData.id_departement}
-                    onChange={(event) => { handleChange("id_departement", event.target.value) }}>
-                    {props.departmentsReducer.map(item => (
-                        <option value={item.id} key={item.id}>{item.name}</option>
-                    ))}
-                </FormGroupSelect>
-            )
-        }
-    }
-
     const handleRegisterUser = async () => {
         const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role, inputData.department);
         if (data.status === "SUCCESS") {
@@ -121,7 +104,25 @@ function RegisterPage(props) {
         }
 
         setIsLoading(false);
-    };
+    }
+
+    const selectDepartemen = () => {
+        if (inputData.role === 'doctor') {
+            return (
+                <FormGroupSelect
+                    name="Departement"
+                    value={inputData.id_departement}
+                    onChange={(event) => { handleChange("id_departement", event.target.value) }}>
+                    {props.departmentsReducer.length !== 0 ?
+                        (props.departmentsReducer.map(item => (
+                            <option value={item.id} key={item.id}>{item.name}</option>
+                        )))
+                        :
+                        (<option value={0} defaultValue disabled>Tidak ada department</option>)}
+                </FormGroupSelect>
+            )
+        }
+    }
 
     return (
         <div className="entry">
