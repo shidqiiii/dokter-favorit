@@ -7,6 +7,7 @@ import FormGroupSelect from '../../Components/Form/FormGroupSelect';
 import FormGroupControl from '../../Components/Form/FormGroupControl';
 import Loader from '../../Components/Loader';
 import FormTemplate from '../../Components/Form/FormTemplate';
+import Modals from '../../Components/Modals';
 
 export default function PaymentPage() {
     const { key } = useParams();
@@ -21,6 +22,7 @@ export default function PaymentPage() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [inputError, setinputError] = useState("")
+    const [show, setShow] = useState(false);
 
     const handleChange = (target, value) => {
         setDataPayment({
@@ -62,11 +64,12 @@ export default function PaymentPage() {
     const handlePayment = async () => {
         const data = await BaseApi.CreatePayment(dataPayment.payment_type, dataPayment.bank, dataPayment.id_appointment, dataPayment.total);
         if (data.status === "SUCCESS") {
-            // console.log("sucess");
-            navigate('/history');
+            setShow(true);
         } else {
             setinputError(data.message);
         }
+
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -96,7 +99,6 @@ export default function PaymentPage() {
 
                 <FormGroupControl
                     name="Biaya"
-                    type="submit"
                     value={"Rp " + dataPayment.total?.toLocaleString('id-ID') || ''}
                     disabled />
 
@@ -123,6 +125,12 @@ export default function PaymentPage() {
                                 handleForm={handleForm()} />
                         </Card.Body>
                     </Card>
+
+                    <Modals
+                        setShow={setShow}
+                        show={show}
+                        page={"/history"}
+                        text={"Payment Successful!"} />
                 </Container>
             </div>
         )

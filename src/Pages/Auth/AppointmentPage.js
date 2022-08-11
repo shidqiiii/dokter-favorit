@@ -9,6 +9,7 @@ import FormGroupSelect from '../../Components/Form/FormGroupSelect';
 import FormTemplate from '../../Components/Form/FormTemplate';
 import Loader from '../../Components/Loader';
 import { useNavigate } from 'react-router-dom';
+import Modals from '../../Components/Modals';
 
 function AppointmentPage(props) {
     const navigate = useNavigate();
@@ -30,6 +31,8 @@ function AppointmentPage(props) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [inputError, setinputError] = useState("")
+    const [show, setShow] = useState(false)
+    const [DoctorList, setDoctorList] = useState([]);
 
     const handleChange = (target, value) => {
         setInputData({
@@ -56,8 +59,6 @@ function AppointmentPage(props) {
         }
     }
 
-    const [DoctorList, setDoctorList] = useState([]);
-
     const handleDoctorsPerDepartments = async (id) => {
         const data = await BaseApi.GetAllDoctors(id);
         if (data.error === "SUCCESS") {
@@ -70,10 +71,12 @@ function AppointmentPage(props) {
     const handleCreateAppointment = async () => {
         const data = await BaseApi.CreateAppointment(inputData.date, inputData.duration, inputData.id_department, inputData.id_doctor, inputData.id_pasien, inputData.catatan_keluhan, inputData.total);
         if (data.status === "SUCCESS") {
-            navigate('/history');
+            setShow(true)
         } else {
             setinputError(data.message);
         }
+
+        setIsLoading(false);
     };
 
     const handleTotalPrice = () => {
@@ -168,6 +171,12 @@ function AppointmentPage(props) {
                                 handleForm={handleForm()} />
                         </Card.Body>
                     </Card>
+
+                    <Modals
+                        setShow={setShow}
+                        show={show}
+                        page={"/history"}
+                        text={"Appointment has been Created!"} />
                 </Container>
             </div>
         );

@@ -17,6 +17,8 @@ function HistoryPage(props) {
     }
 
     const [HistoryList, setHistoryList] = useState(null);
+    const [DoctorList, setDoctorList] = useState([]);
+
 
     const handleAppointment = async (id) => {
         const data = await BaseApi.GetAppointment(id);
@@ -26,8 +28,6 @@ function HistoryPage(props) {
             setHistoryList(null)
         }
     };
-
-    const [DoctorList, setDoctorList] = useState([]);
 
     const handleDoctors = async (id) => {
         const data = await BaseApi.GetAllDoctors(id);
@@ -62,6 +62,15 @@ function HistoryPage(props) {
         }
     };
 
+    const handlePayment = async (id) => {
+        const data = await BaseApi.GetDetailPayment(id);
+        if (data.status === "SUCCESS") {
+            navigateToPage("PaymentHistory", id)
+        } else if (data.error === "FAIL") {
+            navigateToPage("Payment", id)
+        }
+    }
+
     const handleTableBody = () => {
         let content
         if (HistoryList !== null) {
@@ -83,19 +92,14 @@ function HistoryPage(props) {
                         <div className='d-flex align-items-center justify-content-center gap-2'>
                             <Button
                                 size="sm"
-                                onClick={() => navigateToPage("Payment", item.id)}
-                            >
-                                Pembayaran</Button>
-                            <Button
-                                size="sm"
                                 onClick={() => navigateToPage("DetailHistory", item.id)}
                             >
                                 Detail</Button>
                             <Button
                                 size="sm"
-                                onClick={() => navigateToPage("PaymentHistory", item.id)}
+                                onClick={() => handlePayment(item.id)}
                             >
-                                Detail Payment</Button>
+                                Payment</Button>
                         </div>
                     </td>
                 </tr>

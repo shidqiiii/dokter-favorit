@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import { Alert, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import Loader from '../Components/Loader'
 import '../CSS/Entry Page/EntryPage.css'
 import { BaseApi } from '../API/BaseApi';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import FormGroupControl from '../Components/Form/FormGroupControl';
 import FormTemplate from '../Components/Form/FormTemplate';
+import Modals from '../Components/Modals';
+
 
 export default function LoginPage() {
-    const navigate = useNavigate();
 
     const [inputData, setInputData] = useState({
         email: "",
@@ -18,6 +19,8 @@ export default function LoginPage() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [inputError, setinputError] = useState("")
+    const [show, setShow] = useState(false);
+
 
     const handleChange = (target, value) => {
         setInputData({
@@ -81,7 +84,7 @@ export default function LoginPage() {
             const feedback = { 'name': data.name, 'email': data.email, 'id': data.id, 'token': data.token }
             const expired = new Date(new Date().getTime() + 60 * 60 * 1000);
             Cookies.set('data', JSON.stringify(feedback), { expires: expired });
-            navigate('/dashboard');
+            setShow(true);
         } else if (data.error === "ERROR") {
             setinputError(data.message);
         }
@@ -106,7 +109,14 @@ export default function LoginPage() {
                         </Col>
                     </Row>
                 </Card>
+
+                <Modals
+                    setShow={setShow}
+                    show={show}
+                    page={"/dashboard"}
+                    text={"Login Successful!"} />
+
             </Container>
-        </div>
+        </div >
     )
 }

@@ -8,6 +8,7 @@ import Loader from '../Components/Loader';
 import FormGroupControl from '../Components/Form/FormGroupControl';
 import FormGroupSelect from '../Components/Form/FormGroupSelect';
 import FormTemplate from '../Components/Form/FormTemplate';
+import Modals from '../Components/Modals';
 
 function RegisterPage(props) {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ function RegisterPage(props) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [inputError, setinputError] = useState("")
+    const [show, setShow] = useState(false);
 
     const handleChange = (target, value) => {
         setInputData({
@@ -113,7 +115,7 @@ function RegisterPage(props) {
     const handleRegisterUser = async () => {
         const data = await BaseApi.UserRegister(inputData.name, inputData.email, inputData.password, inputData.role, inputData.department);
         if (data.status === "SUCCESS") {
-            navigate('/login');
+            setShow(true)
         } else {
             setinputError(data.message);
         }
@@ -139,6 +141,12 @@ function RegisterPage(props) {
                         </Col>
                     </Row>
                 </Card>
+
+                <Modals
+                    setShow={setShow}
+                    show={show}
+                    page={"/login"}
+                    text={"Register Successful!"} />
             </Container>
         </div>
     )
