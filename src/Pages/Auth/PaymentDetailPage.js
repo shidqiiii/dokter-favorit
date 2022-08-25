@@ -13,6 +13,7 @@ export default function PaymentDetailPage() {
         const data = await BaseApi.GetDetailPayment(id);
         if (data.status === "SUCCESS") {
             const result = JSON.parse(data.data.response_midtrans)
+            console.log(data.data.response_midtrans);
             setDetailPayment(result);
         } else if (data.error === "FAIL") {
             setDetailPayment(null)

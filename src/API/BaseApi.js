@@ -2,8 +2,8 @@ import axios from "axios";
 import moment from "moment";
 
 class BaseApi {
-    // static baseUrl = "https://peaceful-tor-64930.herokuapp.com/";
-    static baseUrl = "http://localhost:4200/";
+    static baseUrl = "https://dokter-favorit-web-app.herokuapp.com/";
+    // static baseUrl = "http://localhost:4200/";
 
     static async UserLogin(email, password) {
         let result = null;
